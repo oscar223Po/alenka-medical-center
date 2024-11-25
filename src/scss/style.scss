@@ -1,0 +1,428 @@
+@use "sass:math";
+
+// Підключення міксинів ===========================================================================================================================================================================================================================================================================
+@import "base/mixins";
+
+// Підключення шрифтів ===========================================================================================================================================================================================================================================================================
+
+// Підключити, якщо є локальні файли шрифтів
+@import "fonts/fonts";
+
+// Підключення іконкових шрифтів ==============================================================================================================================================================================================================================================================================
+// Підключити, якщо є файл іконкового шрифту
+@import "fonts/icons";
+
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+// Налаштування шаблону ============================================================================================================================================================================================================================================================================================================================================================================================
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+
+// За замовчуванням шрифт ==============================================================================================================================================================================================================================================================================
+$fontFamily: "Helvetica";
+$fontFamilyGothampro: "Gothampro";
+$fontSize: toRem(18); // де 14(px) - розмір шрифту за замовчуванням з макету
+
+// Основні кольори
+$mainColor: #4b5472; // Колір шрифту за замовчуванням
+$greenColor: #42ae8d; // Колір шрифту за замовчуванням
+$orangeColor: #ed9231; // Колір шрифту за замовчуванням
+
+$gradientOrange: linear-gradient(90deg, #f7d58b 0%, #ed912d 100%); // Колір шрифту за замовчуванням
+$gradientGreen: linear-gradient(90deg, #1dd99f 0%, #57b39b 100%); // Колір шрифту за замовчуванням
+
+$bgColor: #f2f3f5; // Колір шрифту за замовчуванням
+
+// Палітра кольорів
+// @import "base/colors-palette";
+
+// Налаштування адаптивної сітки ===============================================================================================================================================================================================================================================================================================
+
+// Мінімальна ширина сторінки
+$minWidth: 320;
+// Ширина полотна (макету)
+$maxWidth: 1920;
+// Ширина обмежуючого контейнера (0 = немає обмеження)
+$maxWidthContainer: 1150;
+// Загальний відступ у контейнера
+// (30 = по 15px ліворуч і праворуч, 0 = немає відступу)
+$containerPadding: 30;
+
+// Ширина спрацьовування першого брейкпоінту
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Брейк-поїнти
+$pc: toEm($containerWidth); // ПК, ноутбуки, деякі планшети у горизонтальному положенні
+$tablet: toEm(991.98); // Планшети, деякі телефони в горизонтальному положенні
+$mobile: toEm(767.98); // Телефони L
+$mobileSmall: toEm(479.98); // Телефони S
+
+// Тип адаптива:
+// 1 = чуйність (у контейнера немає брейкпоінтів),
+// 2 = по брейк-поїнт (контейнер змінює свою ширину по брейк-поїнт)
+$responsiveType: 1;
+
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+
+// Обнулення ============================================================================================================================================================================================== =============================================================================================== ===============================================================================================
+@import "base/null";
+
+// Підключення компонентів tailwind ============================================================================================================================================================================================== =============================================================================================== ===========================================================================
+// @import "libs/tailwind";
+
+// Стилі тега BODY ============================================================================================================================================================================================================================================================================================================================================================================================
+body {
+	background-color: $bgColor;
+	// scrollbar-gutter: stable;
+	// Скролл заблоковано
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+		overscroll-behavior: none;
+	}
+	// Сайт завантажений
+	.loaded & {
+	}
+}
+// Оболонка wrapper ============================================================================================================================================================================================================================================================================================================================================================================================================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	@supports (overflow: clip) {
+		overflow: clip;
+	}
+	// Притискаємо footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фікс для слайдерів
+	> * {
+		min-width: 0;
+	}
+}
+// Обмежуючий контейнер ======================================================================================================================================================================================================================
+
+// (i) Стилі будуть застосовуватись до
+// всіх класів, що містять *__container
+// Наприклад header__container, main__container і т.п.
+// Сніппет (HTML): cnt
+
+@if ($responsiveType==1) {
+	// Чуйна
+	[class*="__container"] {
+		@if ($maxWidthContainer>0) {
+			max-width: toRem($containerWidth);
+			margin: 0 auto;
+		}
+		@if ($containerPadding>0) {
+			@if ($maxWidthContainer>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			} @else {
+				@include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
+				@include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
+			}
+		}
+	}
+} @else {
+	// Брейк-поїнтами
+	[class*="__container"] {
+		margin: 0 auto;
+		@if ($maxWidthContainer>0) {
+			max-width: toRem($containerWidth);
+		} @else {
+			@if ($containerPadding>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			}
+		}
+		@media (max-width: $pc) {
+			max-width: toRem(970);
+		}
+		@media (max-width: $tablet) {
+			max-width: toRem(750);
+		}
+		@media (max-width: $mobile) {
+			max-width: none;
+			@if ($containerPadding>0 and $maxWidthContainer>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			}
+		}
+	}
+}
+// (i) Експерементальний функціонал
+// Заміна обмежуючому контейнеру
+[class*="--gc"] {
+	@include gridContainer();
+}
+// ========================================================================================================================================================
+// Підключення базових стилів, шаблонів (заготівель) та допоміжних класів
+// Для підключення/вимкнення конкретних стилів дивись base.scss
+@import "base";
+// $=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=->
+// Підключення стилів загальних елементів проекту
+@import "common";
+// $=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=->
+// Підключення стилів окремих блоків
+@import "header";
+@import "footer";
+// ========================================================================================================================================================
+// Hero
+.hero {
+	margin-top: toRem(15);
+	background-color: #fff;
+	padding: toRem(30) toRem(0);
+	// .hero__container
+	&__container {
+		display: grid;
+		@include adaptiveValue("gap", 25, 10);
+		@media (min-width: $mobile) {
+			grid-template-columns: 73.913043% 1fr;
+		}
+	}
+	// .hero__content
+	&__content {
+		display: grid;
+		@include adaptiveValue("gap", 25, 10);
+	}
+	// .hero__aside-mobile
+	&__aside-mobile {
+		@media (min-width: $mobile) {
+			display: none;
+		}
+	}
+	// .hero__baner
+	&__baner {
+	}
+	// .hero__baners
+	&__baners {
+		display: grid;
+		@include adaptiveValue("gap", 25, 10);
+		@media (min-width: $mobile) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	// .hero__aside
+	&__aside {
+		display: grid;
+		@include adaptiveValue("gap", 25, 10);
+		@media (max-width: $mobile) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+}
+.slider-baner {
+	overflow: hidden;
+	position: relative;
+	background-color: $bgColor;
+	@include adaptiveValue("border-radius", 30, 12);
+	// .slider-baner__wrapper
+	&__wrapper {
+	}
+	// .slider-baner__slide
+	&__slide {
+	}
+	// .slider-baner__dotts
+	&__dotts {
+		left: 0;
+		bottom: 0;
+		position: absolute;
+		@include adaptiveValue("left", 50, 25, 2, $containerWidth, 767.98);
+		@include adaptiveValue("bottom", 30, 20, 2, $containerWidth, 767.98);
+		@media (max-width: $mobile) {
+			@include adaptiveValue("left", 25, 10, 0, 767.98, 320);
+			@include adaptiveValue("bottom", 20, 10, 0, 767.98, 320);
+		}
+	}
+}
+.slide-slider-baner {
+	position: relative;
+	// .slide-slider-baner__image
+	&__image {
+		height: 100%;
+	}
+	// .slide-slider-baner__body
+	&__body {
+		top: 0;
+		left: 0;
+		position: absolute;
+		@include adaptiveValue("top", 40, 20, 2, $containerWidth, 767.98);
+		@include adaptiveValue("left", 35, 20, 2, $containerWidth, 767.98);
+		@media (max-width: $mobile) {
+			@include adaptiveValue("top", 20, 10, 0, 767.98, 320);
+			@include adaptiveValue("left", 20, 8, 0, 767.98, 320);
+		}
+	}
+	// .slide-slider-baner__title
+	&__title {
+		color: #fff;
+		font-weight: 900;
+		font-family: $fontFamilyGothampro;
+		@include adaptiveValue("font-size", 62, 42, 2, $containerWidth, 767.98);
+		span {
+			display: flex;
+			font-weight: 400;
+			margin-top: toRem(3);
+			padding-left: toRem(4);
+			font-family: $fontFamily;
+			@include adaptiveValue("font-size", 19, 12.5, 2, $containerWidth, 767.98);
+		}
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 40, 25, 2, $containerWidth, 767.98);
+		}
+		@media (max-width: $mobile) {
+			@include adaptiveValue("font-size", 52, 22, 0, 767.98, 320);
+			span {
+				@include adaptiveValue("font-size", 15.5, 7, 0, 767.98, 320);
+			}
+			&:not(:last-child) {
+				@include adaptiveValue("margin-bottom", 25, 15, 0, 767.98, 320);
+			}
+		}
+	}
+	// .slide-slider-baner__button
+	&__button {
+		@include adaptiveValue("padding-left", 40, 15);
+		@include adaptiveValue("padding-right", 40, 15);
+		&.button {
+			@include adaptiveValue("min-height", 45, 30);
+			@include adaptiveValue("font-size", 16, 12);
+		}
+	}
+}
+.baner-hero {
+	overflow: hidden;
+	position: relative;
+	@include adaptiveValue("border-radius", 30, 12);
+	@media (any-hover: hover) {
+		&:hover {
+			.baner-hero__image {
+				img {
+					transform: scale(1.1);
+				}
+			}
+		}
+	}
+	// .baner-hero__image
+	&__image {
+		height: 100%;
+	}
+	// .baner-hero__title
+	&__title {
+		color: #fff;
+		display: flex;
+		gap: toRem(10);
+		font-weight: 700;
+		position: absolute;
+		align-items: center;
+		font-family: $fontFamilyGothampro;
+		@include adaptiveValue("right", 30, 15);
+		@include adaptiveValue("bottom", 20, 10);
+		@include adaptiveValue("font-size", 29, 20, 2, $containerWidth, 767.98);
+		@media (max-width: $tablet) {
+			img {
+				width: toRem(45);
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			img {
+				width: toRem(30);
+			}
+		}
+	}
+}
+// ========================================================================================================================================================
+// Service
+.service {
+	@include adaptiveValue("padding-top", 65, 35);
+	// .service__container
+	&__container {
+	}
+	// .service__tabs
+	&__tabs {
+	}
+	// .service__body
+	&__body {
+	}
+}
+.articles-service {
+	display: grid;
+	gap: toRem(15);
+	grid-template-columns: repeat(auto-fill, minmax(toRem(250), 1fr));
+	// .articles-service__item
+	&__item {
+		overflow: hidden;
+		position: relative;
+		min-height: toRem(235);
+		@include adaptiveValue("border-radius", 35, 15);
+		&--01 {
+			background: linear-gradient(0deg, #b9dfdb 0%, #b1e1dd 100%);
+			.articles-service__arrow {
+				color: #b9dfdb;
+			}
+		}
+		&--02 {
+			background: linear-gradient(0deg, #a3c977 0%, #c3ee92 100%);
+			.articles-service__arrow {
+				color: #a3c977;
+			}
+		}
+		&--03 {
+			background: linear-gradient(0deg, #f17397 0%, #f7afc4 99%, #f7afc4 100%);
+			.articles-service__arrow {
+				color: #f17397;
+			}
+		}
+		&--04 {
+			background: linear-gradient(0deg, #d1add3 0%, #fcd9ff 99%, #fcd9ff 100%);
+			.articles-service__arrow {
+				color: #d1add3;
+			}
+		}
+		@media (max-width: $mobile) {
+			min-height: toRem(195);
+		}
+		@media (max-width: $mobileSmall) {
+			min-height: toRem(175);
+		}
+	}
+	// .articles-service__body
+	&__body {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		@include adaptiveValue("padding-top", 30, 15);
+		@include adaptiveValue("padding-bottom", 30, 15);
+		@include adaptiveValue("padding-left", 25, 17);
+		@include adaptiveValue("padding-right", 25, 17);
+	}
+	// .articles-service__title
+	&__title {
+		color: #fff;
+		font-weight: 700;
+		line-height: 120%;
+		@include adaptiveValue("font-size", 24, 20);
+	}
+	// .articles-service__arrow
+	&__arrow {
+		display: flex;
+		width: toRem(42);
+		height: toRem(42);
+		border-radius: 50%;
+		align-items: center;
+		padding-left: toRem(3);
+		background-color: #fff;
+		justify-content: center;
+	}
+	// .articles-service__icon
+	&__icon {
+		right: 17px;
+		bottom: 17px;
+		position: absolute;
+		max-width: toRem(90);
+		img {
+			width: 100%;
+		}
+	}
+}
+// ========================================================================================================================================================

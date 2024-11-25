@@ -1,0 +1,52 @@
+//========================================================================================================================================================
+%ic {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+[class*="_icon-"] {
+	&::before {
+		@extend %ic;
+	}
+}
+//========================================================================================================================================================
+// Fonts Of Icons
+._icon-arrow-circle-full:before {
+	content: "\e900";
+}
+._icon-arrow-circle:before {
+	content: "\e901";
+}
+._icon-arrow-line:before {
+	content: "\e902";
+}
+._icon-arrow-min:before {
+	content: "\e903";
+}
+._icon-arrow:before {
+	content: "\e904";
+}
+._icon-eye:before {
+	content: "\e905";
+}
+._icon-play:before {
+	content: "\e906";
+}
+._icon-s-tg:before {
+	content: "\e907";
+}
+._icon-s-vk:before {
+	content: "\e908";
+}
+._icon-s-wh:before {
+	content: "\e909";
+}
+._icon-search:before {
+	content: "\e90a";
+}
+//========================================================================================================================================================

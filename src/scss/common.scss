@@ -1,0 +1,168 @@
+//========================================================================================================================================================
+// Заголовки, загальні БЕМ блоки та інше...
+//========================================================================================================================================================
+::-webkit-scrollbar {
+	width: toRem(1);
+	border-radius: toRem(10);
+	background-color: $bgColor;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: toRem(10);
+	background-color: $mainColor;
+}
+::selection {
+	background-color: rgba(#a60101, 0.5);
+}
+summary {
+	list-style: none;
+	&::marker {
+		display: none;
+	}
+}
+@supports (-webkit-appearance: none) {
+	summary::-webkit-details-marker {
+		display: none;
+	}
+}
+//========================================================================================================================================================
+// Box Shadow
+.shad {
+	transition: box-shadow 0.5s;
+	box-shadow:
+		rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+		rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+		rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+		rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+		rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
+		rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+	&.shad-hv {
+		@media (any-hover: hover) {
+			&:hover {
+				box-shadow: rgba(14, 63, 126, 0.35) 0px 20px 34px -5px;
+			}
+		}
+	}
+}
+//========================================================================================================================================================
+// Title & Text & Image
+.title {
+	font-weight: 700;
+	@include adaptiveValue("font-size", 43, 24);
+}
+.text {
+	line-height: 125%;
+	&--min {
+		font-size: toRem(15);
+	}
+}
+.img {
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1.03);
+		transition: transform 0.5s;
+	}
+}
+//========================================================================================================================================================
+// Socials
+.socials {
+	@media (max-width: $mobile) {
+		display: flex;
+		row-gap: toRem(12);
+		align-items: center;
+		flex-direction: column;
+	}
+	// .socials__title
+	&__title {
+		font-weight: 700;
+		@include adaptiveValue("font-size", 17, 14, 2, $containerWidth, 767.98);
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 15, 10, 2, $containerWidth, 767.98);
+		}
+	}
+	// .socials__list
+	&__list {
+		display: flex;
+		gap: toRem(10);
+		align-items: center;
+	}
+	// .socials__link
+	&__link {
+		color: #fff;
+		display: flex;
+		width: toRem(39);
+		height: toRem(39);
+		align-items: center;
+		font-size: toRem(23);
+		justify-content: center;
+		border-radius: toRem(10);
+		transition: background-color 0.5s;
+		&:nth-child(1) {
+			font-size: toRem(16);
+			background-color: #f17398;
+		}
+		&:nth-child(2) {
+			background-color: #acddd9;
+		}
+		&:nth-child(3) {
+			background-color: #4b5472;
+		}
+		&:nth-child(4) {
+			background-color: #30b391;
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: #000;
+			}
+		}
+		@media (max-width: $tablet) {
+			width: toRem(30);
+			height: toRem(30);
+			font-size: toRem(18);
+			border-radius: toRem(8);
+			&:nth-child(1) {
+				font-size: toRem(12);
+			}
+		}
+		@media (max-width: $mobile) {
+			width: toRem(35);
+			height: toRem(35);
+			font-size: toRem(22);
+			&:nth-child(1) {
+				font-size: toRem(16);
+			}
+		}
+	}
+}
+// ========================================================================================================================================================
+// Sloders Line Dotts
+.dotts {
+	display: flex;
+	align-items: center;
+	column-gap: toRem(3);
+	.swiper-pagination-bullet {
+		opacity: 0.5;
+		display: flex;
+		cursor: pointer;
+		width: toRem(34);
+		height: toRem(3);
+		background-color: #fff;
+		border-radius: toRem(5);
+		transition:
+			opacity 0.5s,
+			width 0.5s;
+		@media (max-width: $mobileSmall) {
+			width: toRem(24);
+		}
+	}
+	.swiper-pagination-bullet-active {
+		opacity: 1;
+		width: toRem(64);
+		@media (max-width: $mobileSmall) {
+			width: toRem(36);
+		}
+	}
+}
+// ========================================================================================================================================================
