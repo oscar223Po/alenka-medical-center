@@ -113,3 +113,65 @@
 	&__spollers {
 	}
 }
+// Tabs About
+.tabs-about {
+	// .tabs-about__content
+	&__content {
+	}
+	// .tabs-about__body
+	&__body {
+		font-weight: 700;
+		line-height: 135%;
+		@include adaptiveValue("font-size", 18, 14);
+		@include adaptiveValue("margin-bottom", 50, 35, 2, $containerWidth, 479.98);
+		p {
+			&:not(:last-child) {
+				@include adaptiveValue("margin-bottom", 20, 10);
+			}
+		}
+	}
+	// .tabs-about__navigation
+	&__navigation {
+		display: flex;
+		gap: toRem(5);
+		padding:toRem(5);
+		overflow: hidden;
+		background-color: #fff;
+		@include adaptiveValue("border-radius", 30, 12);
+		@media (max-width: toEm(1034)) {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media (max-width: $mobileSmall) {
+			display: none;
+		}
+	}
+	// .tabs-about__title
+	&__title {
+		width: 100%;
+		color: #000;
+		white-space: nowrap;
+		min-height: toRem(50);
+		padding: toRem(0) toRem(20);
+		transition:
+			background-color 0.4s,
+			color 0.4s;
+		@include adaptiveValue("font-size", 16, 14);
+		@include adaptiveValue("border-radius", 30, 12);
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: rgba(#efefef, 0.3);
+			}
+		}
+		&._tab-active {
+			color: $mainColor;
+			background-color: #efefef;
+			box-shadow:
+			rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+			rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+			rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+			rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+			rgba(14, 63, 126, 0.04) 0px 12px 12px -6px;
+		}
+	}
+}

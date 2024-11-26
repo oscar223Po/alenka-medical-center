@@ -47,6 +47,7 @@ summary {
 // Title & Text & Image
 .title {
 	font-weight: 700;
+	line-height: 125%;
 	@include adaptiveValue("font-size", 43, 24);
 }
 .text {
@@ -137,7 +138,49 @@ summary {
 	}
 }
 // ========================================================================================================================================================
-// Sloders Line Dotts
+// Slider Arrow Controll
+.controls {
+	display: flex;
+	align-items: center;
+	.controls-arrow {
+		display: flex;
+		width: toRem(30);
+		height: toRem(30);
+		align-items: center;
+		font-size: toRem(28);
+		justify-content: center;
+		transition:
+			color 0.4s,
+			opacity 0.4s;
+		@media (any-hover: hover) {
+			&:hover {
+				color: $mainColor;
+			}
+		}
+		&::before {
+			@extend %ic;
+			content: "\e900";
+		}
+		&.swiper-button-disabled {
+			font-size: toRem(30);
+			pointer-events: none;
+			&::before {
+				@extend %ic;
+				content: "\e901";
+			}
+		}
+		// .controls-arrow--prev
+		&--prev {
+			&::before {
+				transform: rotate(-180deg);
+			}
+		}
+		// .controls-arrow--next
+		&--next {
+		}
+	}
+}
+// Slider Line Dotts
 .dotts {
 	display: flex;
 	align-items: center;
@@ -162,6 +205,40 @@ summary {
 		width: toRem(64);
 		@media (max-width: $mobileSmall) {
 			width: toRem(36);
+		}
+	}
+}
+// ========================================================================================================================================================
+// Heading
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	// .heading__title
+	&__title {
+	}
+	// .heading__link
+	&__link {
+		display: flex;
+		gap: toRem(8);
+		font-weight: 700;
+		color: $orangeColor;
+		align-items: center;
+		transition: color 0.4s;
+		@include adaptiveValue("font-size", 22, 18);
+		&::after {
+			@extend %ic;
+			content: "\e903";
+			margin-top: toRem(1);
+			@include adaptiveValue("font-size", 17, 14);
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				color: $greenColor;
+				span {
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 }
