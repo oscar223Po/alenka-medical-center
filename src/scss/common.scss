@@ -49,6 +49,9 @@ summary {
 	font-weight: 700;
 	line-height: 125%;
 	@include adaptiveValue("font-size", 43, 24);
+	@media (max-width: $mobile) {
+		text-align: center;
+	}
 }
 .text {
 	line-height: 125%;
@@ -214,6 +217,9 @@ summary {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	@media (max-width: $mobile) {
+		justify-content: center;
+	}
 	// .heading__title
 	&__title {
 	}

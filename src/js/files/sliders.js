@@ -8,7 +8,7 @@
 // При необхідності підключаємо додаткові модулі слайдера, вказуючи їх у {} через кому
 // Приклад: { Navigation, Autoplay }
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 /*
 Основні модулі слайдера:
 Navigation, Pagination, Autoplay, 
@@ -33,13 +33,13 @@ function initSliders() {
 		new Swiper('.slider-baner', { // Вказуємо склас потрібного слайдера
 			// Підключаємо модулі слайдера
 			// для конкретного випадку
-			modules: [Navigation, Pagination],
+			modules: [Navigation, Pagination, Autoplay],
 			observer: true,
 			observeParents: true,
 			slidesPerView: 1,
 			spaceBetween: 0,
 			//autoHeight: true,
-			speed: 800,
+			speed: 1200,
 
 			//touchRatio: 0,
 			//simulateTouch: false,
@@ -47,14 +47,12 @@ function initSliders() {
 			//preloadImages: false,
 			//lazy: true,
 
-			/*
 			// Ефекти
-			effect: 'fade',
+			// effect: 'fade',
 			autoplay: {
-				delay: 3000,
+				delay: 2000,
 				disableOnInteraction: false,
 			},
-			*/
 
 			// Пагінація
 			pagination: {
@@ -229,6 +227,84 @@ function initSliders() {
 			navigation: {
 				prevEl: '.controls-direct-review__arrow--prev',
 				nextEl: '.controls-direct-review__arrow--next',
+			},
+
+			/*
+			// Брейкпоінти
+			breakpoints: {
+				640: {
+					slidesPerView: 1,
+					spaceBetween: 0,
+					autoHeight: true,
+				},
+				768: {
+					slidesPerView: 2,
+					spaceBetween: 20,
+				},
+				992: {
+					slidesPerView: 3,
+					spaceBetween: 20,
+				},
+				1268: {
+					slidesPerView: 4,
+					spaceBetween: 30,
+				},
+			},
+			*/
+			// Події
+			on: {
+
+			}
+		});
+	}
+	if (document.querySelector('.watch__slider')) { // Вказуємо склас потрібного слайдера
+		// Створюємо слайдер
+		new Swiper('.watch__slider', { // Вказуємо склас потрібного слайдера
+			// Підключаємо модулі слайдера
+			// для конкретного випадку
+			modules: [Navigation],
+			observer: true,
+			observeParents: true,
+			slidesPerView: 1,
+			spaceBetween: 15,
+			autoHeight: true,
+			speed: 800,
+
+			//touchRatio: 0,
+			//simulateTouch: false,
+			//loop: true,
+			//preloadImages: false,
+			//lazy: true,
+
+			/*
+			// Ефекти
+			effect: 'fade',
+			autoplay: {
+				delay: 3000,
+				disableOnInteraction: false,
+			},
+			*/
+
+			/*
+			// Пагінація
+			pagination: {
+				el: '.slider-baner__dotts',
+				clickable: true,
+			},
+			*/
+
+			// Скроллбар
+			/*
+			scrollbar: {
+				el: '.swiper-scrollbar',
+				draggable: true,
+			},
+			*/
+
+			// Кнопки "вліво/вправо"
+			navigation: {
+				prevEl: '.controls-watch__arrow--prev',
+				nextEl: '.controls-watch__arrow--next',
 			},
 
 			/*
