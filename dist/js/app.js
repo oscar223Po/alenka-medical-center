@@ -247,6 +247,14 @@
                 setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
             }));
         }
+        function updateIndicator(nav) {
+            const activeButton = nav.querySelector("._tab-active");
+            if (!activeButton) return;
+            const buttonRect = activeButton.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+            nav.style.setProperty("--indicator-left", `${buttonRect.left - navRect.left}px`);
+            nav.style.setProperty("--indicator-width", `${buttonRect.width}px`);
+        }
         function setTitlePosition(tabsMediaArray, matchMedia) {
             tabsMediaArray.forEach((tabsMediaItem => {
                 tabsMediaItem = tabsMediaItem.item;
@@ -283,13 +291,26 @@
                 if (tabsActiveHashBlock && index == tabsActiveHash[1]) tabsTitles[index].classList.add("_tab-active");
                 tabsContentItem.hidden = !tabsTitles[index].classList.contains("_tab-active");
             }));
+            const nav = tabsBlock.querySelector(".tabs-service__navigation");
+            if (nav) {
+                const buttons = nav.querySelectorAll(".tabs-service__subtitle");
+                buttons.forEach((button => {
+                    button.addEventListener("click", (() => {
+                        buttons.forEach((b => b.classList.remove("_tab-active")));
+                        button.classList.add("_tab-active");
+                        updateIndicator(nav);
+                        setTabsStatus(tabsBlock);
+                    }));
+                }));
+                updateIndicator(nav);
+            }
         }
         function setTabsStatus(tabsBlock) {
             let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-title]");
             let tabsContent = tabsBlock.querySelectorAll("[data-tabs-item]");
             const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
             function isTabsAnamate(tabsBlock) {
-                if (tabsBlock.hasAttribute("data-tabs-animate")) return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 500;
+                if (tabsBlock.hasAttribute("data-tabs-animate")) return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 700;
             }
             const tabsBlockAnimate = isTabsAnamate(tabsBlock);
             if (tabsContent.length > 0) {
@@ -4098,6 +4119,7 @@
             slidesPerView: 1,
             spaceBetween: 0,
             speed: 1200,
+            loop: true,
             autoplay: {
                 delay: 2e3,
                 disableOnInteraction: false
@@ -4114,7 +4136,7 @@
             observeParents: true,
             slidesPerView: 3,
             spaceBetween: 35,
-            speed: 800,
+            speed: 500,
             navigation: {
                 prevEl: ".controls-gallery-review__arrow--prev",
                 nextEl: ".controls-gallery-review__arrow--next"
@@ -4144,11 +4166,11 @@
             observer: true,
             observeParents: true,
             slidesPerView: 1,
-            spaceBetween: 5,
-            speed: 800,
+            spaceBetween: 35,
+            speed: 700,
             navigation: {
-                prevEl: ".controls-direct-review__arrow--prev",
-                nextEl: ".controls-direct-review__arrow--next"
+                prevEl: ".controls-slide-direct-review__arrow--prev",
+                nextEl: ".controls-slide-direct-review__arrow--next"
             },
             on: {}
         });
@@ -4366,14 +4388,40 @@
     }
     const da = new DynamicAdapt("max");
     da.init();
-    if (document.querySelector(".main-header__search-btn")) document.addEventListener("click", (function(e) {
-        if (bodyLockStatus && e.target.closest(".main-header__search-btn")) {
-            bodyLockToggle();
-            document.documentElement.classList.toggle("search-open");
-        } else if (!e.target.closest(".search__body") && document.documentElement.classList.contains("search-open")) {
-            document.documentElement.classList.remove("search-open");
-            bodyLockToggle();
-        }
+    document.addEventListener("DOMContentLoaded", (function() {
+        if (document.querySelector(".main-header__search-btn")) document.addEventListener("click", (function(e) {
+            if (bodyLockStatus && e.target.closest(".main-header__search-btn")) {
+                bodyLockToggle();
+                document.documentElement.classList.toggle("search-open");
+            } else if (!e.target.closest(".search__body") && document.documentElement.classList.contains("search-open")) {
+                document.documentElement.classList.remove("search-open");
+                bodyLockToggle();
+            }
+        }));
+        const videosCover = document.querySelector(".record");
+        const videos = document.querySelectorAll(".record__video");
+        const buttons = document.querySelectorAll(".record__button");
+        if (videos !== null) videos.forEach(((video, index) => {
+            const videoButton = buttons[index];
+            if (video !== null && videoButton !== null) {
+                videoButton.addEventListener("click", (function() {
+                    if (video.paused) {
+                        video.play();
+                        video.classList.add("video-pointer");
+                        videosCover.classList.add("record-play");
+                        videoButton.classList.add("play-btn-disable");
+                    }
+                }));
+                video.addEventListener("click", (function() {
+                    if (!video.paused) {
+                        video.pause();
+                        video.classList.remove("video-pointer");
+                        videosCover.classList.remove("record-play");
+                        videoButton.classList.remove("play-btn-disable");
+                    }
+                }));
+            }
+        }));
     }));
     window["FLS"] = false;
     addLoadedClass();

@@ -295,7 +295,6 @@ export function spollers() {
 export function tabs() {
 	const tabs = document.querySelectorAll('[data-tabs]');
 	let tabsActiveHash = [];
-
 	if (tabs.length > 0) {
 		const hash = getHash();
 		if (hash && hash.startsWith('tab-')) {
@@ -307,8 +306,7 @@ export function tabs() {
 			tabsBlock.addEventListener("click", setTabsAction);
 			initTabs(tabsBlock);
 		});
-
-		// Отримання слойлерів з медіа-запитами
+		// Получение слойлеров с медиазапросами
 		let mdQueriesArray = dataMediaQueries(tabs, "tabs");
 		if (mdQueriesArray && mdQueriesArray.length) {
 			mdQueriesArray.forEach(mdQueriesItem => {
@@ -320,7 +318,19 @@ export function tabs() {
 			});
 		}
 	}
-	// Встановлення позицій заголовків
+	// Функция для обновления индикатора (псевдоэлемента)
+	function updateIndicator(nav) {
+		const activeButton = nav.querySelector('._tab-active');
+		if (!activeButton) return;
+
+		const buttonRect = activeButton.getBoundingClientRect();
+		const navRect = nav.getBoundingClientRect();
+
+		// Обновляем стили псевдоэлемента ::before через изменение стилей самого контейнера
+		nav.style.setProperty('--indicator-left', `${buttonRect.left - navRect.left}px`);
+		nav.style.setProperty('--indicator-width', `${buttonRect.width}px`);
+	}
+	// Функция для установки позиции заголовков
 	function setTitlePosition(tabsMediaArray, matchMedia) {
 		tabsMediaArray.forEach(tabsMediaItem => {
 			tabsMediaItem = tabsMediaItem.item;
@@ -342,13 +352,12 @@ export function tabs() {
 			});
 		});
 	}
-	// Робота з контентом
+	// Инициализация вкладок
 	function initTabs(tabsBlock) {
 		let tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
 		let tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
 		const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
 		const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
-
 		if (tabsActiveHashBlock) {
 			const tabsActiveTitle = tabsBlock.querySelector('[data-tabs-titles]>._tab-active');
 			tabsActiveTitle ? tabsActiveTitle.classList.remove('_tab-active') : null;
@@ -364,14 +373,30 @@ export function tabs() {
 				tabsContentItem.hidden = !tabsTitles[index].classList.contains('_tab-active');
 			});
 		}
+		// Обработка навигации по вкладкам
+		const nav = tabsBlock.querySelector('.tabs-service__navigation');
+		if (nav) {
+			const buttons = nav.querySelectorAll('.tabs-service__subtitle');
+			buttons.forEach(button => {
+				button.addEventListener('click', () => {
+					buttons.forEach(b => b.classList.remove('_tab-active'));  // Убираем активный класс с других кнопок
+					button.classList.add('_tab-active');  // Добавляем активный класс на текущую кнопку
+					updateIndicator(nav);  // Обновляем позицию полоски
+					setTabsStatus(tabsBlock); // Обновляем контент вкладок
+				});
+			});
+			// Изначально обновляем позицию при загрузке
+			updateIndicator(nav);
+		}
 	}
+	// Обновление состояния вкладок
 	function setTabsStatus(tabsBlock) {
 		let tabsTitles = tabsBlock.querySelectorAll('[data-tabs-title]');
 		let tabsContent = tabsBlock.querySelectorAll('[data-tabs-item]');
 		const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
 		function isTabsAnamate(tabsBlock) {
 			if (tabsBlock.hasAttribute('data-tabs-animate')) {
-				return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 500;
+				return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 700;
 			}
 		}
 		const tabsBlockAnimate = isTabsAnamate(tabsBlock);
@@ -399,6 +424,7 @@ export function tabs() {
 			});
 		}
 	}
+	// Обработчик переключения вкладок
 	function setTabsAction(e) {
 		const el = e.target;
 		if (el.closest('[data-tabs-title]')) {
@@ -409,7 +435,7 @@ export function tabs() {
 				tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter(item => item.closest('[data-tabs]') === tabsBlock) : null;
 				tabActiveTitle.length ? tabActiveTitle[0].classList.remove('_tab-active') : null;
 				tabTitle.classList.add('_tab-active');
-				setTabsStatus(tabsBlock);
+				setTabsStatus(tabsBlock);  // Обновляем контент
 			}
 			e.preventDefault();
 		}

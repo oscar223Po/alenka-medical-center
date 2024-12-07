@@ -43,7 +43,7 @@ function initSliders() {
 
 			//touchRatio: 0,
 			//simulateTouch: false,
-			//loop: true,
+			loop: true,
 			//preloadImages: false,
 			//lazy: true,
 
@@ -115,7 +115,7 @@ function initSliders() {
 			slidesPerView: 3,
 			spaceBetween: 35,
 			//autoHeight: true,
-			speed: 800,
+			speed: 500,
 
 			//touchRatio: 0,
 			//simulateTouch: false,
@@ -188,9 +188,9 @@ function initSliders() {
 			observer: true,
 			observeParents: true,
 			slidesPerView: 1,
-			spaceBetween: 5,
+			spaceBetween: 35,
 			//autoHeight: true,
-			speed: 800,
+			speed: 700,
 
 			//touchRatio: 0,
 			//simulateTouch: false,
@@ -225,8 +225,8 @@ function initSliders() {
 
 			// Кнопки "вліво/вправо"
 			navigation: {
-				prevEl: '.controls-direct-review__arrow--prev',
-				nextEl: '.controls-direct-review__arrow--next',
+				prevEl: '.controls-slide-direct-review__arrow--prev',
+				nextEl: '.controls-slide-direct-review__arrow--next',
 			},
 
 			/*
