@@ -1,11 +1,10 @@
-// ========================================================================================================================================================
 // Hero
 .hero {
 	margin-top: toRem(15);
 	background-color: #fff;
 	padding: toRem(30) toRem(0);
-	// .hero__container-lnd
-	&__container-lnd {
+	// .hero__contain-lnd
+	&__contain-lnd {
 		display: grid;
 		@include adaptiveValue("gap", 25, 10);
 		@media (min-width: $mobile) {
@@ -170,7 +169,6 @@
 		}
 	}
 }
-// ========================================================================================================================================================
 // Service
 .service {
 	@include adaptiveValue("padding-top", 65, 35);
@@ -265,15 +263,23 @@
 		}
 	}
 }
-// ========================================================================================================================================================
 // Review
 .review {
-	background-color: #fff;
-	padding-top: toRem(40);
-	@include adaptiveValue("margin-top", 40, 30);
-	@include adaptiveValue("padding-bottom", 70, 40);
-	// .review__container-lnd
-	&__container-lnd {
+	&.review-white {
+		padding-top: toRem(40);
+		background-color: #fff;
+		@include adaptiveValue("margin-top", 40, 30);
+	}
+	&.review-md {
+		// margin-top: toRem(-350);
+		padding-left: toRem(15);
+		padding-right: toRem(15);
+		// transform: translate(0px, -55%);
+		@include adaptiveValue("margin-top", -350, -200);
+	}
+	// .review__contain-lnd
+	&__contain-lnd {
+		@include adaptiveValue("padding-bottom", 70, 40);
 	}
 	// .review__heading
 	&__heading {
@@ -303,10 +309,22 @@
 }
 // Gallery
 .gallery-review {
+	&.gallery-review-card {
+		.slide-gallery-review__author {
+			&:not(:last-child) {
+				@include adaptiveValue("margin-bottom", 30, 5);
+			}
+		}
+		.slide-gallery-review {
+			@include adaptiveValue("row-gap", 50, 20);
+			@include adaptiveValue("padding-left", 35, 10);
+			@include adaptiveValue("padding-right", 45, 10);
+		}
+	}
 	// .gallery-review__inner
 	&__inner {
 		position: relative;
-		@media (max-width: toEm(1269.98)) {
+		@media (max-width: toEm(1299.98)) {
 			&:not(:last-child) {
 				margin-bottom: toRem(15);
 			}
@@ -417,38 +435,38 @@
 	}
 }
 .controls-gallery-review {
-	@media (min-width: toEm(1229.98)) {
+	@media (min-width: toEm(1299.98)) {
 		top: 50%;
 		width: 100%;
 		position: absolute;
 		justify-content: space-between;
 		transform: translate(0px, -50%);
 	}
-	@media (max-width: toEm(1229.98)) {
+	@media (max-width: toEm(1299.98)) {
 		gap: toRem(12);
 		justify-content: center;
 	}
 	// .controls-gallery-review__arrow
 	&__arrow {
 		color: #d4e6f4;
-		@media (min-width: toEm(1229.98)) {
+		@media (min-width: toEm(1299.98)) {
 			&.swiper-button-disabled {
 				opacity: 0;
 			}
 		}
-		@media (max-width: toEm(1229.98)) {
+		@media (max-width: toEm(1299.98)) {
 			color: $mainColor;
 		}
 		// .controls-gallery-review__arrow--prev
 		&--prev {
-			@media (min-width: toEm(1229.98)) {
+			@media (min-width: toEm(1299.98)) {
 				margin-left: toRem(-3);
 				transform: translate(-100%, 0px);
 			}
 		}
 		// .controls-gallery-review__arrow--next
 		&--next {
-			@media (min-width: toEm(1229.98)) {
+			@media (min-width: toEm(1299.98)) {
 				margin-right: toRem(-3);
 				transform: translate(100%, 0px);
 			}
@@ -584,12 +602,11 @@
 		}
 	}
 }
-// ========================================================================================================================================================
 // Branch
 .branch {
 	@include adaptiveValue("padding-top", 50, 30);
-	// .branch__container-lnd
-	&__container-lnd {
+	// .branch__contain-lnd
+	&__contain-lnd {
 	}
 	// .branch__title
 	&__title {
@@ -679,7 +696,6 @@
 		opacity: 0.85;
 	}
 }
-// ========================================================================================================================================================
 // About
 .about {
 	color: #fff;
@@ -687,8 +703,8 @@
 	@include adaptiveValue("margin-top", 50, 30);
 	@include adaptiveValue("padding-top", 40, 25);
 	@include adaptiveValue("padding-bottom", 100, 45);
-	// .about__container-lnd
-	&__container-lnd {
+	// .about__contain-lnd
+	&__contain-lnd {
 	}
 	// .about__title
 	&__title {
@@ -701,14 +717,13 @@
 	&__tabs {
 	}
 }
-// ========================================================================================================================================================
 // Advantage
 .advantage {
 	background-color: #fff;
 	@include adaptiveValue("padding-top", 50, 35);
 	@include adaptiveValue("padding-bottom", 45, 35);
-	// .advantage__container-lnd
-	&__container-lnd {
+	// .advantage__contain-lnd
+	&__contain-lnd {
 	}
 	// .advantage__title
 	&__title {
@@ -907,12 +922,11 @@
 		}
 	}
 }
-// ========================================================================================================================================================
 // Watch
 .watch {
 	@include adaptiveValue("padding-top", 70, 35);
-	// .watch__container-lnd
-	&__container-lnd {
+	// .watch__contain-lnd
+	&__contain-lnd {
 	}
 	// .watch__body
 	&__body {
@@ -1063,7 +1077,6 @@
 		}
 	}
 }
-// ========================================================================================================================================================
 // News
 .news {
 	@include adaptiveValue("padding-top", 50, 35);
@@ -1075,8 +1088,8 @@
 			display: none;
 		}
 	}
-	// .news__container-lnd
-	&__container-lnd {
+	// .news__contain-lnd
+	&__contain-lnd {
 	}
 	// .news__heading
 	&__heading {
@@ -1229,4 +1242,3 @@
 		@include adaptiveValue("font-size", 16, 12);
 	}
 }
-// ========================================================================================================================================================
