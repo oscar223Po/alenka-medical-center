@@ -317,8 +317,14 @@ export function tabs() {
 				setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
 			});
 		}
+		// Обновляем индикатор после полной загрузки страницы
+		window.addEventListener('load', () => {
+			tabs.forEach(tabsBlock => {
+				const navs = tabsBlock.querySelectorAll('.tabs-service__navigation, .tabs-master__navigation');
+				navs.forEach(nav => updateIndicator(nav));
+			});
+		});
 	}
-	// Функция для обновления индикатора (псевдоэлемента)
 	function updateIndicator(nav) {
 		const activeButton = nav.querySelector('._tab-active');
 		if (!activeButton) return;
@@ -326,7 +332,6 @@ export function tabs() {
 		const buttonRect = activeButton.getBoundingClientRect();
 		const navRect = nav.getBoundingClientRect();
 
-		// Обновляем стили псевдоэлемента ::before через изменение стилей самого контейнера
 		nav.style.setProperty('--indicator-left', `${buttonRect.left - navRect.left}px`);
 		nav.style.setProperty('--indicator-width', `${buttonRect.width}px`);
 	}
@@ -357,7 +362,8 @@ export function tabs() {
 		let tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
 		let tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
 		const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-		const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+		// const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+		const tabsActiveHashBlock = false;
 		if (tabsActiveHashBlock) {
 			const tabsActiveTitle = tabsBlock.querySelector('[data-tabs-titles]>._tab-active');
 			tabsActiveTitle ? tabsActiveTitle.classList.remove('_tab-active') : null;
@@ -366,28 +372,49 @@ export function tabs() {
 			tabsContent.forEach((tabsContentItem, index) => {
 				tabsTitles[index].setAttribute('data-tabs-title', '');
 				tabsContentItem.setAttribute('data-tabs-item', '');
-
 				if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
 					tabsTitles[index].classList.add('_tab-active');
 				}
 				tabsContentItem.hidden = !tabsTitles[index].classList.contains('_tab-active');
 			});
 		}
-		// Обработка навигации по вкладкам
-		const nav = tabsBlock.querySelector('.tabs-service__navigation');
-		if (nav) {
-			const buttons = nav.querySelectorAll('.tabs-service__subtitle');
+		const navs = tabsBlock.querySelectorAll('.tabs-service__navigation, .tabs-master__navigation');
+		navs.forEach(nav => {
+			const buttons = nav.querySelectorAll('button');
 			buttons.forEach(button => {
-				button.addEventListener('click', () => {
-					buttons.forEach(b => b.classList.remove('_tab-active'));  // Убираем активный класс с других кнопок
-					button.classList.add('_tab-active');  // Добавляем активный класс на текущую кнопку
-					updateIndicator(nav);  // Обновляем позицию полоски
-					setTabsStatus(tabsBlock); // Обновляем контент вкладок
-				});
+				button.addEventListener('click', () => handleNavClick(button, nav, tabsBlock));
 			});
-			// Изначально обновляем позицию при загрузке
 			updateIndicator(nav);
-		}
+		});
+	}
+	function handleNavClick(button, nav, tabsBlock) {
+		const buttons = nav.querySelectorAll('button');
+		buttons.forEach(btn => btn.classList.remove('_tab-active'));
+		button.classList.add('_tab-active');
+		updateIndicator(nav);
+		updateTabsContent(tabsBlock);
+	}
+	function updateTabsContent(tabsBlock) {
+		const tabsTitles = Array.from(tabsBlock.querySelectorAll('[data-tabs-title]'));
+		const tabsContent = Array.from(tabsBlock.querySelectorAll('[data-tabs-item]'));
+		const tabsIndex = tabsBlock.dataset.tabsIndex;
+		const animateDuration = tabsBlock.dataset.tabsAnimate ? Number(tabsBlock.dataset.tabsAnimate) : 0;
+		tabsContent.forEach((content, index) => {
+			if (tabsTitles[index].classList.contains('_tab-active')) {
+				if (animateDuration) {
+					_slideDown(content, animateDuration);
+				} else {
+					content.hidden = false;
+				}
+				setHash(`tab-${tabsIndex}-${index}`);
+			} else {
+				if (animateDuration) {
+					_slideUp(content, animateDuration);
+				} else {
+					content.hidden = true;
+				}
+			}
+		});
 	}
 	// Обновление состояния вкладок
 	function setTabsStatus(tabsBlock) {

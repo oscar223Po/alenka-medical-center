@@ -162,14 +162,14 @@ summary {
 		}
 		&::before {
 			@extend %ic;
-			content: "\e900";
+			content: "\e901";
 		}
 		&.swiper-button-disabled {
 			font-size: toRem(30);
 			pointer-events: none;
 			&::before {
 				@extend %ic;
-				content: "\e901";
+				content: "\e902";
 			}
 		}
 		// .controls-arrow--prev
@@ -234,7 +234,7 @@ summary {
 		@include adaptiveValue("font-size", 22, 18);
 		&::after {
 			@extend %ic;
-			content: "\e903";
+			content: "\e904";
 			margin-top: toRem(1);
 			@include adaptiveValue("font-size", 17, 14);
 		}
@@ -245,6 +245,30 @@ summary {
 					text-decoration: underline;
 				}
 			}
+		}
+	}
+}
+// ========================================================================================================================================================
+// Breadcrumb
+.breadcrumb {
+	color: #fff;
+	gap: toRem(5);
+	font-weight: 700;
+	align-items: center;
+	display: inline-flex;
+	font-size: toRem(14);
+	border-radius: toRem(15);
+	padding: toRem(4) toRem(8);
+	background-color: $greenColor;
+	transition: background-color 0.4s;
+	&::before {
+		font-weight: 700;
+		font-size: toRem(16);
+		transform: rotate(-180deg);
+	}
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $orangeColor;
 		}
 	}
 }

@@ -12,8 +12,8 @@
 	@media (max-width: $mobile) {
 		background-color: $bgColor;
 	}
-	// .footer__container
-	&__container {
+	// .footer__container-lnd
+	&__container-lnd {
 		display: grid;
 		padding-bottom: toRem(50);
 		grid-template-columns: 63.478261% auto;

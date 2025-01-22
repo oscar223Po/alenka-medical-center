@@ -63,6 +63,13 @@
 			z-index: 1;
 			color: #fff;
 			position: relative;
+			&::before {
+				transform: scaleX(1);
+				width: 100%;
+			}
+		}
+		&:not(._tab-active)::before {
+			transform: scaleX(0);
 		}
 		@media (max-width: $mobile) {
 			height: toRem(35);
@@ -74,19 +81,6 @@
 			font-size: toRem(10);
 		}
 	}
-	// .tabs-service__content
-	&__content {
-	}
-	// .tabs-service__body
-	&__body {
-	}
-}
-.tabs-service__subtitle._tab-active::before {
-	transform: scaleX(1);
-	width: 100%;
-}
-.tabs-service__subtitle:not(._tab-active)::before {
-	transform: scaleX(0);
 }
 .body-tabs-service {
 	// .body-tabs-service__articles
@@ -116,9 +110,6 @@
 			row-gap: toRem(10);
 			flex-direction: column;
 		}
-	}
-	// .body-tabs-service__spollers
-	&__spollers {
 	}
 }
 // Tabs About
@@ -201,6 +192,156 @@
 				rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
 				rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
 				rgba(14, 63, 126, 0.04) 0px 12px 12px -6px;
+		}
+	}
+}
+// Tabs Master
+.tabs-master {
+	overflow: hidden;
+	// .tabs-master__inner
+	&__inner {
+		overflow-x: auto;
+		padding-bottom: toRem(25);
+		border-radius: toRem(10) toRem(10) toRem(0) toRem(0);
+		&::-webkit-scrollbar {
+			height: toRem(3);
+			background-color: $bgColor;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: toRem(10);
+			background-color: $mainColor;
+		}
+		&:not(:last-child) {
+			margin-bottom: toRem(10);
+		}
+		@media (max-width: toEm(784.98)) {
+			padding-bottom: toRem(15);
+			&:not(:last-child) {
+				margin-bottom: toRem(25);
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			&:not(:last-child) {
+				margin-bottom: toRem(20);
+			}
+		}
+	}
+	// .tabs-master__navigation
+	&__navigation {
+		gap: toRem(5);
+		padding: toRem(5);
+		position: relative;
+		align-items: center;
+		display: inline-flex;
+		border-radius: toRem(50);
+		background-color: #efefef;
+		&::before {
+			top: 4px;
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: var(--indicator-left, 0);
+			width: var(--indicator-width, 0);
+			height: toRem(67);
+			background-color: #fff;
+			border-radius: toRem(50);
+			transition:
+				transform 0.3s ease,
+				width 0.3s ease,
+				left 0.3s ease;
+		}
+		/* 		@media (max-width: toEm(844.98)) {
+			&::before {
+				height: toRem(57);
+			}
+		} */
+		@media (min-width: toEm(784.98)) {
+			width: 100%;
+		}
+		@media (max-width: toEm(784.98)) {
+			&::before {
+				height: toRem(57);
+			}
+		}
+	}
+	// .tabs-master__title
+	&__title {
+		color: #000;
+		display: flex;
+		cursor: pointer;
+		height: toRem(65);
+		line-height: 120%;
+		white-space: nowrap;
+		align-items: center;
+		transition: color 0.5s;
+		justify-content: center;
+		border-radius: toRem(50);
+		padding: toRem(0) toRem(15);
+		@include adaptiveValue("font-size", 25, 16);
+		span {
+			position: relative;
+		}
+		&._tab-active {
+			z-index: 1;
+			font-weight: 700;
+			color: $greenColor;
+			position: relative;
+			transition: color 0.5s;
+			&::before {
+				width: 100%;
+				transform: scaleX(1);
+			}
+		}
+		&:not(._tab-active)::before {
+			transform: scaleX(0);
+		}
+		@media (min-width: toEm(784.98)) {
+			width: 100%;
+		}
+		@media (max-width: toEm(784.98)) {
+			font-weight: 700;
+			height: toRem(55);
+		}
+		/* 		@media (max-width: $tablet) {
+			font-weight: 700;
+		}
+		@media (max-width: toEm(844.98)) {
+			height: toRem(55);
+		} */
+	}
+	// .tabs-master__item
+	&__item {
+		color: #000;
+		display: flex;
+		gap: toRem(12);
+		font-weight: 700;
+		line-height: 120%;
+		text-align: justify;
+		@include adaptiveValue("font-size", 20, 14);
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 20, 15);
+		}
+		// .tabs-master__item--icon
+		&--icon {
+			&::before {
+				content: "";
+				display: flex;
+				height: toRem(25);
+				align-items: center;
+				margin-top: toRem(3);
+				min-width: toRem(25);
+				background: url("@img/icons/check.svg") 0 0 no-repeat;
+			}
+		}
+		// .tabs-master__item--noicon
+		&--noicon {
+			&::before {
+				content: "";
+				display: flex;
+				height: toRem(25);
+				align-items: center;
+				min-width: toRem(25);
+			}
 		}
 	}
 }

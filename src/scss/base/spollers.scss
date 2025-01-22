@@ -70,7 +70,7 @@
 			padding: toRem(8) toRem(0);
 			justify-content: space-between;
 			&::after {
-				content: "\e900";
+				content: "\e901";
 				transform: rotate(90deg);
 			}
 			&._spoller-active {
@@ -180,7 +180,7 @@
 				margin-bottom: toRem(0);
 			}
 			&::after {
-				content: "\e900";
+				content: "\e901";
 				transform: rotate(90deg);
 			}
 			&._spoller-active {
@@ -267,7 +267,7 @@
 				margin-bottom: toRem(0);
 			}
 			&::after {
-				content: "\e900";
+				content: "\e901";
 				transform: rotate(90deg);
 			}
 			&._spoller-active {

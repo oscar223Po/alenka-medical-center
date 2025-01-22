@@ -10,8 +10,8 @@
 		rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
 		rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
 		rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
-	// .header__container
-	&__container {
+	// .header__container-lnd
+	&__container-lnd {
 		padding-top: toRem(15);
 		padding-bottom: toRem(20);
 		@media (max-width: toEm(874.98)) {
@@ -239,5 +239,81 @@
 		@media (max-width: $mobileSmall) {
 			min-height: toRem(32);
 		}
+	}
+}
+// Header Min
+.header {
+	// .header__container
+	&__container {
+		display: flex;
+		align-items: center;
+		padding-top: toRem(25);
+		padding-bottom: toRem(25);
+		justify-content: space-between;
+		@include adaptiveValue("padding-top", 22, 12);
+		@include adaptiveValue("padding-bottom", 25, 15);
+	}
+	// .header__logo
+	&__logo {
+		transition: opacity 0.5s;
+		img {
+			max-width: 100%;
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+		@media (min-width: toEm(874.98)) {
+			img {
+				&:last-child {
+					display: none;
+				}
+			}
+		}
+		@media (max-width: toEm(874.98)) {
+			max-width: toRem(70);
+			padding-bottom: toRem(0);
+			img {
+				&:first-child {
+					display: none;
+				}
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			max-width: toRem(54);
+		}
+	}
+	// .header__contact
+	&__contact {
+		display: flex;
+		flex-direction: column;
+	}
+	// .header__label
+	&__label {
+		font-weight: 700;
+		line-height: 150%;
+		color: $greenColor;
+		margin-bottom: toRem(-3);
+		@include adaptiveValue("font-size", 18, 14);
+	}
+	// .header__phone
+	&__phone {
+		font-weight: 700;
+		line-height: 150%;
+		color: $greenColor;
+		transition: color 0.3s;
+		@include adaptiveValue("font-size", 26, 21);
+		@media (any-hover: hover) {
+			&:hover {
+				color: red;
+				text-decoration: underline;
+			}
+		}
+	}
+	// .header__span
+	&__span {
+		color: $greenColor;
+		@include adaptiveValue("font-size", 12.5, 10);
 	}
 }

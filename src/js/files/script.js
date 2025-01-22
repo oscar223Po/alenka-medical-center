@@ -4,6 +4,7 @@ import { bodyLockStatus, bodyLockToggle, isMobile } from "./functions.js";
 import { flsModules } from "./modules.js";
 
 document.addEventListener('DOMContentLoaded', function () {
+	// --------------- [ JavaScript Search Window ] ---------------
 	if (document.querySelector(".main-header__search-btn")) {
 		document.addEventListener("click", function (e) {
 			if (bodyLockStatus && e.target.closest('.main-header__search-btn')) {
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	};
+	// --------------- [ JavaScript Video Controll ] ---------------
 	const videosCover = document.querySelector('.record');
 	const videos = document.querySelectorAll('.record__video');
 	const buttons = document.querySelectorAll('.record__button');
@@ -41,4 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	}
+	// --------------- [ JavaScript Time Controll ] ---------------
+	const timeMasterButtons = document.querySelectorAll('.about-main-master__action');
+	timeMasterButtons.forEach(button => {
+		button.addEventListener('click', () => {
+			// Удаляем класс active у всех кнопок
+			timeMasterButtons.forEach(btn => btn.classList.remove('about-main-master__action--active'));
+			// Добавляем класс active текущей кнопке
+			button.classList.add('about-main-master__action--active');
+		});
+	});
 });

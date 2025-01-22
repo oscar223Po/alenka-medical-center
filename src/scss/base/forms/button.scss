@@ -59,6 +59,12 @@
 			background: $gradientGreen;
 		}
 	}
+	// .button--yellow
+	&--yellow {
+		&::before {
+			background: $yellowGreen;
+		}
+	}
 	// .button--white
 	&--white {
 		color: $greenColor;
