@@ -1,0 +1,125 @@
+// Expert
+.expert {
+	@include adaptiveValue("padding-top", 40, 20);
+	// .expert__container
+	&__container {
+	}
+	// .expert__head
+	&__head {
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 45, 25);
+		}
+	}
+	// .expert__doctors
+	&__doctors {
+	}
+}
+.head-expert {
+	// .head-expert__breadcrumb
+	&__breadcrumb {
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 20, 15);
+		}
+	}
+	// .head-expert__title
+	&__title {
+		&.title {
+			text-align: left;
+		}
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 30, 20);
+		}
+	}
+	// .head-expert__filter
+	&__filter {
+		display: grid;
+		gap: toRem(12);
+		grid-template-columns: repeat(auto-fill, minmax(toRem(250), 1fr));
+		&:not(:last-child) {
+			margin-bottom: toRem(25);
+		}
+	}
+	// .head-expert__search
+	&__search {
+		width: 100%;
+		display: flex;
+		gap: toRem(10);
+		overflow: hidden;
+		align-items: center;
+		background-color: #fff;
+		border-radius: toRem(15);
+	}
+	// .head-expert__input
+	&__input {
+		color: $greenColor;
+		min-height: toRem(40);
+		padding-right: toRem(15);
+		&::placeholder {
+			color: $greenColor;
+			transition: opacity 0.3s;
+		}
+		&:focus {
+			&::placeholder {
+				opacity: 0;
+			}
+		}
+	}
+	// .head-expert__icon
+	&__icon {
+		color: #fff;
+		display: flex;
+		width: toRem(60);
+		align-items: center;
+		font-size: toRem(20);
+		justify-content: center;
+		transition: background-color 0.5s;
+		background-color: rgba($greenColor, 0.7);
+		@include adaptiveValue("height", 60, 45);
+		border-radius: toRem(0) toRem(5) toRem(5) toRem(0);
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: rgba($greenColor, 1);
+			}
+		}
+	}
+	// .head-expert__select
+	&__select {
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
+	// .head-expert__list
+	&__list {
+		display: flex;
+		gap: toRem(8);
+		flex-wrap: wrap;
+		@media (max-width: toEm(449.98)) {
+			flex-direction: column;
+		}
+	}
+	// .head-expert__item
+	&__item {
+	}
+	// .head-expert__link
+	&__link {
+		color: #32b492;
+		font-size: toRem(14);
+		background-color: #fff;
+		@include adaptiveValue("padding-top", 17, 12);
+		@include adaptiveValue("padding-left", 20, 15);
+		@include adaptiveValue("padding-right", 20, 15);
+		@include adaptiveValue("border-radius", 22, 15);
+		@include adaptiveValue("padding-bottom", 17, 12);
+		transition:
+			background-color 0.3s,
+			color 0.3s;
+		&.link-expert-active {
+			color: #fff;
+			background-color: #32b492;
+		}
+		@media (max-width: toEm(449.98)) {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}

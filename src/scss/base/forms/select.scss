@@ -1,6 +1,7 @@
 // <SELECT>
 // Сніппет (HTML): sel
 .select {
+	width: 100%;
 	min-width: 0;
 	position: relative;
 	// .select__body
@@ -11,33 +12,46 @@
 	&__title {
 		color: inherit;
 		text-align: left;
-		border: 1px solid #d9d9d9;
-		background-color: #fff;
 		cursor: pointer;
 		width: 100%;
-		border-radius: 4px;
+		background-color: #fff;
+		border-radius: toRem(15);
+		transition: border-radius 0.3s;
+		box-shadow:
+			rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+			rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+			rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+			rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+			rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
+			rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+		._select-open & {
+			border-radius: toRem(15) toRem(15) toRem(0) toRem(0);
+		}
 	}
 	// .select__value
 	&__value {
 		display: flex;
-		min-width: 0;
 		align-items: center;
-		height: toRem(30);
-		padding: 0 toRem(15);
-		gap: toRem(10);
+		padding-left: toRem(15);
+		padding-right: toRem(20);
+		justify-content: space-between;
+		@include adaptiveValue("height", 60, 45);
 		> * {
 			flex: 1 1 auto;
 		}
 		&:after {
-			content: "";
+			@extend %ic;
+			content: "\e904";
+			color: $greenColor;
 			align-self: stretch;
-			flex: 0 0 10px;
 			transition: all 0.3s ease 0s;
 			display: flex;
+			font-size: toRem(16);
 			justify-content: center;
 			align-items: center;
+			transform: rotate(90deg);
 			._select-open & {
-				transform: rotate(-180deg);
+				transform: rotate(-90deg);
 			}
 		}
 		&._select-pseudo-label {
@@ -49,36 +63,72 @@
 	}
 	// .select__content
 	&__content {
+		display: flex;
 		flex: 1 1 auto;
 		overflow: hidden;
+		color: $greenColor;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		align-items: center;
+		&.select-icon-search,
+		&.select-icon-location,
+		&.select-icon-user {
+			&::before {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+		&.select-icon-search {
+			gap: toRem(10);
+			&::before {
+				font-size: toRem(20);
+			}
+		}
+		&.select-icon-location {
+			gap: toRem(7);
+			&::before {
+				font-size: toRem(28);
+				margin-left: toRem(-3);
+			}
+		}
+		&.select-icon-user {
+			gap: toRem(8);
+			&::before {
+				font-size: toRem(26);
+				margin-left: toRem(-3);
+			}
+		}
 	}
 	// .select__text
 	&__text {
 		flex: 1 1 auto;
 		overflow: hidden;
-		text-overflow: ellipsis;
 		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	&__input {
 		width: 100%;
-		background-color: transparent;
 		height: 100%;
+		background-color: transparent;
 	}
 	// .select__options
 	&__options {
 		color: #000;
+		overflow: hidden;
 		position: absolute;
 		top: calc(100% - toRem(1));
-		border-radius: 0 0 4px 4px;
 		min-width: 100%;
 		left: 0;
 		background-color: #fff;
-		border-top: 0;
-		border: 1px solid #d9d9d9;
-		border-top: 0;
-		padding: 10px 0px 5px 0px;
+		border-radius: toRem(0) toRem(0) toRem(15) toRem(15);
+		box-shadow:
+			rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+			rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+			rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+			rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+			rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
+			rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 	}
 	// .select__scroll
 	&__scroll {
@@ -96,16 +146,39 @@
 	// .select__option
 	&__option {
 		width: 100%;
+		display: flex;
 		text-align: left;
 		cursor: pointer;
-		padding: 5px 15px;
+		min-height: toRem(40);
+		align-items: center;
+		padding: 0px 15px;
 		color: inherit;
+		&.select-icon-search {
+			gap: toRem(10);
+			&::before {
+				font-size: toRem(20);
+			}
+		}
+		&.select-icon-location {
+			gap: toRem(7);
+			&::before {
+				font-size: toRem(28);
+				margin-left: toRem(-3);
+			}
+		}
+		&.select-icon-user {
+			gap: toRem(8);
+			&::before {
+				font-size: toRem(26);
+				margin-left: toRem(-3);
+			}
+		}
 		&._select-selected {
 			background-color: #eee;
 		}
 		@media (any-hover: hover) {
 			&:hover {
-				background: #d9d9d9;
+				background: rgba(14, 63, 126, 0.04);
 			}
 		}
 	}
@@ -120,6 +193,7 @@
 	&__text {
 	}
 
+	/*
 	&--show-top {
 		.select__options {
 			top: auto;
@@ -130,6 +204,7 @@
 			padding: 5px 0px 10px 0px;
 		}
 	}
+	*/
 
 	// Стан селекту
 	&._select-open {
@@ -145,7 +220,6 @@
 	&._select-checkbox {
 	}
 }
-
 // Тег
 ._select-tag {
 	cursor: pointer;

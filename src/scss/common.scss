@@ -258,17 +258,229 @@ summary {
 	display: inline-flex;
 	font-size: toRem(14);
 	border-radius: toRem(15);
-	padding: toRem(4) toRem(8);
+	padding: toRem(5) toRem(8);
 	background-color: $greenColor;
 	transition: background-color 0.4s;
 	&::before {
 		font-weight: 700;
 		font-size: toRem(16);
+		margin-bottom: toRem(3);
 		transform: rotate(-180deg);
 	}
 	@media (any-hover: hover) {
 		&:hover {
 			background-color: $orangeColor;
+		}
+	}
+}
+// ========================================================================================================================================================
+// Doctors Articles
+.doctors {
+	display: grid;
+	@include adaptiveValue("gap", 20, 15);
+	grid-template-columns: repeat(auto-fill, minmax(toRem(250), 1fr));
+	// .doctors__item
+	&__item {
+	}
+	// .doctors__more
+	&__more {
+	}
+}
+.item-doctors {
+	display: grid;
+	row-gap: toRem(20);
+	background-color: #fff;
+	grid-template-rows: 1fr auto;
+	@include adaptiveValue("padding", 30, 15);
+	@include adaptiveValue("border-radius", 35, 20);
+	@media (any-hover: hover) {
+		&:hover {
+			.item-doctors__image {
+				img {
+					transform: scale(1.1);
+				}
+			}
+			.item-doctors__play {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+	&.item-doctors-sm {
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 0;
+		opacity: 0;
+		overflow: hidden;
+		visibility: hidden;
+		position: absolute;
+		transform: translateY(40px);
+		transition:
+			opacity 0.7s ease,
+			transform 0.7s ease,
+			box-shadow 0.5s ease,
+			visibility 0s linear 0.5s,
+			height 0s linear 0.5s;
+		&.visible {
+			opacity: 1;
+			height: auto;
+			position: relative;
+			visibility: visible;
+			transform: translateY(0);
+			transition:
+				opacity 0.7s ease,
+				transform 0.7s ease,
+				box-shadow 0.5s ease,
+				height 0s ease;
+		}
+	}
+	// .item-doctors__about
+	&__about {
+		display: grid;
+		row-gap: toRem(15);
+		text-align: center;
+	}
+	// .item-doctors__profile
+	&__profile {
+		color: $greenColor;
+	}
+	// .item-doctors__picture
+	&__picture {
+		position: relative;
+	}
+	// .item-doctors__image
+	&__image {
+		display: flex;
+		border-radius: 50%;
+	}
+	// .item-doctors__play
+	&__play {
+		top: 50%;
+		color: #fff;
+		width: toRem(44);
+		height: toRem(44);
+		position: absolute;
+		padding-top: toRem(2);
+		padding-left: toRem(1);
+		border-radius: toRem(22);
+		background-color: $greenColor;
+		transform: translate(-50%, -50%);
+		transition:
+			opacity 0.5s,
+			visibility 0.5s,
+			background-color 0.3s;
+		@include adaptiveValue("left", 0, 10, 0, $containerWidth, 767.98);
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: $orangeColor;
+			}
+		}
+		@media (min-width: $mobile) {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+	// .item-doctors__exp
+	&__exp {
+		top: 50%;
+		display: flex;
+		color: #424242;
+		font-weight: 700;
+		height: toRem(38);
+		position: absolute;
+		align-items: center;
+		font-size: toRem(12);
+		justify-content: center;
+		border-radius: toRem(22);
+		background-color: #f7d68b;
+		padding: toRem(0) toRem(10);
+		transform: translate(100%, -50%);
+		@include adaptiveValue("right", 50, 80, 0, $containerWidth, 767.98);
+	}
+	// .item-doctors__name
+	&__name {
+		font-weight: 300;
+		line-height: 125%;
+		color: $greenColor;
+		@include adaptiveValue("font-size", 20, 18);
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	// .item-doctors__tags
+	&__tags {
+		display: grid;
+		row-gap: toRem(4);
+		text-align: center;
+	}
+	// .item-doctors__tag
+	&__tag {
+		color: #5e5e5e;
+		font-weight: 300;
+		font-size: toRem(14);
+	}
+}
+.more-doctors {
+	display: flex;
+	align-items: center;
+	padding-top: toRem(30);
+	justify-content: center;
+	padding-bottom: toRem(30);
+	background: $yellowGradient;
+	@include adaptiveValue("border-radius", 35, 20);
+	// .more-doctors__content
+	&__content {
+		width: 100%;
+	}
+	// .more-doctors__label
+	&__label {
+		color: #fff;
+		display: flex;
+		text-align: center;
+		pointer-events: none;
+		flex-direction: column;
+		span {
+			&:nth-child(1),
+			&:nth-child(3) {
+				font-weight: 300;
+				@include adaptiveValue("font-size", 22, 18);
+			}
+			&:nth-child(2) {
+				font-weight: 700;
+				margin-top: toRem(5);
+				margin-bottom: toRem(3);
+				@include adaptiveValue("font-size", 70, 40);
+			}
+		}
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 30, 20);
+		}
+	}
+	// .more-doctors__button
+	&__button {
+		display: flex;
+		color: #5e5e5e;
+		margin: 0 auto;
+		font-weight: 300;
+		align-items: center;
+		background-color: #fff;
+		justify-content: center;
+		transition:
+			background-color 0.3s,
+			color 0.3s;
+		@include adaptiveValue("height", 55, 45);
+		@include adaptiveValue("font-size", 22, 16);
+		@include adaptiveValue("padding-left", 40, 20);
+		@include adaptiveValue("border-radius", 30, 20);
+		@include adaptiveValue("padding-right", 40, 20);
+		@media (any-hover: hover) {
+			&:hover {
+				color: #fff;
+				background-color: $orangeColor;
+			}
 		}
 	}
 }

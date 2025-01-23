@@ -685,6 +685,9 @@
 		@include adaptiveValue("right", 20, 15);
 		@include adaptiveValue("bottom", 18, 15);
 		@include adaptiveValue("font-size", 70, 60);
+		@media (max-width: $mobile) {
+			color: #fff;
+		}
 	}
 	@media (max-width: toEm(639.98)) {
 		row-gap: toRem(35);
