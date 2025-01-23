@@ -198,6 +198,13 @@
 // Tabs Master
 .tabs-master {
 	overflow: hidden;
+	opacity: 0;
+	transition:
+		opacity 0.5s ease 0.05s,
+		box-shadow 0.5s;
+	&._watcher-view {
+		opacity: 1;
+	}
 	// .tabs-master__inner
 	&__inner {
 		overflow-x: auto;

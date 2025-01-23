@@ -182,7 +182,6 @@ body {
 // ========================================================================================================================================================
 // Background
 .background {
-	margin-top: toRem(15);
 	background-color: #fff;
 	margin-left: toRem(25);
 	margin-right: toRem(25);
@@ -190,6 +189,18 @@ body {
 	@media (max-width: toEm(1329.98)) {
 		margin-left: toRem(15);
 		margin-right: toRem(15);
+	}
+	// .background--01
+	&--01 {
+		margin-top: toRem(15);
+	}
+	// .background--02
+	&--02 {
+		@include adaptiveValue("margin-top", 40, 30);
+	}
+	// .background--03
+	&--03 {
+		@include adaptiveValue("margin-top", 30, 25);
 	}
 }
 // ========================================================================================================================================================

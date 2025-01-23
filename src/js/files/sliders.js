@@ -335,6 +335,81 @@ function initSliders() {
 			}
 		});
 	}
+	if (document.querySelector('.regard__slider')) { // Вказуємо склас потрібного слайдера
+		// Створюємо слайдер
+		new Swiper('.regard__slider', { // Вказуємо склас потрібного слайдера
+			// Підключаємо модулі слайдера
+			// для конкретного випадку
+			modules: [Navigation],
+			observer: true,
+			observeParents: true,
+			slidesPerView: 4,
+			spaceBetween: 20,
+			//autoHeight: true,
+			speed: 800,
+
+			//touchRatio: 0,
+			//simulateTouch: false,
+			// loop: true,
+			//preloadImages: false,
+			//lazy: true,
+
+			/*
+			// Ефекти
+			// effect: 'fade',
+			autoplay: {
+				delay: 2000,
+				disableOnInteraction: false,
+			},
+			*/
+
+			/*
+			// Пагінація
+			pagination: {
+				el: '.slider-baner__dotts',
+				clickable: true,
+			},
+			*/
+
+			// Скроллбар
+			/*
+			scrollbar: {
+				el: '.swiper-scrollbar',
+				draggable: true,
+			},
+			*/
+
+			// Кнопки "вліво/вправо"
+			navigation: {
+				prevEl: '.regard__arrow--prev',
+				nextEl: '.regard__arrow--next',
+			},
+
+			// Брейкпоінти
+			breakpoints: {
+				320: {
+					spaceBetween: 12,
+					slidesPerView: 1.5,
+				},
+				579: {
+					spaceBetween: 12,
+					slidesPerView: 2.5,
+				},
+				768: {
+					spaceBetween: 20,
+					slidesPerView: 3.5,
+				},
+				1079: {
+					slidesPerView: 4,
+					spaceBetween: 20,
+				},
+			},
+			// Події
+			on: {
+
+			}
+		});
+	}
 }
 // Скролл на базі слайдера (за класом swiper scroll для оболонки слайдера)
 function initSlidersScroll() {
