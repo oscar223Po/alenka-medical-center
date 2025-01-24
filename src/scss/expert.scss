@@ -10,6 +10,12 @@
 			@include adaptiveValue("margin-bottom", 45, 25);
 		}
 	}
+	// .expert__title
+	&__title {
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 30, 20);
+		}
+	}
 	// .expert__doctors
 	&__doctors {
 	}

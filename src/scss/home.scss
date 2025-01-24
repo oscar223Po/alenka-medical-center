@@ -271,11 +271,16 @@
 		@include adaptiveValue("margin-top", 40, 30);
 	}
 	&.review-md {
-		// margin-top: toRem(-350);
 		padding-left: toRem(15);
 		padding-right: toRem(15);
-		// transform: translate(0px, -55%);
 		@include adaptiveValue("margin-top", -350, -200);
+	}
+	&.review-pd {
+		@include adaptiveValue("margin-top", 45, 35);
+		@include adaptiveValue("padding-top", 45, 25);
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 0, 10);
+		}
 	}
 	// .review__contain-lnd
 	&__contain-lnd {

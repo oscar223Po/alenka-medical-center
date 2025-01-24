@@ -264,7 +264,6 @@ summary {
 	&::before {
 		font-weight: 700;
 		font-size: toRem(16);
-		margin-bottom: toRem(3);
 		transform: rotate(-180deg);
 	}
 	@media (any-hover: hover) {
