@@ -1076,37 +1076,28 @@ summary::marker {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(15.625rem,1fr))
 }
+.doctors__item[style="display: none;"] {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px)
+}
+.doctors__item[style="display: block;"] {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0)
+}
 .item-doctors {
+  opacity: 0;
   display: grid;
   row-gap: 1.25rem;
   background-color: #fff;
-  grid-template-rows: 1fr auto
+  grid-template-rows: 1fr auto;
+  transition: opacity .4s linear,box-shadow .4s linear,-webkit-transform .4s linear;
+  transition: opacity .4s linear,transform .4s linear,box-shadow .4s linear;
+  transition: opacity .4s linear,transform .4s linear,box-shadow .4s linear,-webkit-transform .4s linear
 }
-.item-doctors.item-doctors-sm {
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  visibility: hidden;
-  position: absolute;
-  -webkit-transform: translateY(40px);
-  transform: translateY(40px);
-  transition: opacity .7s ease,box-shadow .5s ease,visibility 0s linear .5s,height 0s linear .5s,-webkit-transform .7s ease;
-  transition: opacity .7s ease,transform .7s ease,box-shadow .5s ease,visibility 0s linear .5s,height 0s linear .5s;
-  transition: opacity .7s ease,transform .7s ease,box-shadow .5s ease,visibility 0s linear .5s,height 0s linear .5s,-webkit-transform .7s ease
-}
-.item-doctors.item-doctors-sm.visible {
-  opacity: 1;
-  height: auto;
-  position: relative;
-  visibility: visible;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-  transition: opacity .7s ease,box-shadow .5s ease,height 0s ease,-webkit-transform .7s ease;
-  transition: opacity .7s ease,transform .7s ease,box-shadow .5s ease,height 0s ease;
-  transition: opacity .7s ease,transform .7s ease,box-shadow .5s ease,height 0s ease,-webkit-transform .7s ease
+.item-doctors._watcher-view {
+  opacity: 1
 }
 .item-doctors__about {
   display: grid;
@@ -1114,7 +1105,8 @@ summary::marker {
   text-align: center
 }
 .item-doctors__profile {
-  color: #42ae8d
+  color: #42ae8d;
+  margin: 0 -.9375rem
 }
 .item-doctors__picture {
   position: relative

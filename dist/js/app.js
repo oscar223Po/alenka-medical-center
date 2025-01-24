@@ -4884,7 +4884,7 @@
     const da = new DynamicAdapt("max");
     da.init();
     document.addEventListener("DOMContentLoaded", (function() {
-        if (document.querySelector(".main-header__search-btn")) document.addEventListener("click", (function(e) {
+        if (document.querySelector(".main-header__search-btn") !== null) document.addEventListener("click", (function(e) {
             if (bodyLockStatus && e.target.closest(".main-header__search-btn")) {
                 bodyLockToggle();
                 document.documentElement.classList.toggle("search-open");
@@ -4918,19 +4918,54 @@
             }
         }));
         const timeMasterButtons = document.querySelectorAll(".about-main-master__action");
-        timeMasterButtons.forEach((button => {
+        if (timeMasterButtons !== null) timeMasterButtons.forEach((button => {
             button.addEventListener("click", (() => {
                 timeMasterButtons.forEach((btn => btn.classList.remove("about-main-master__action--active")));
                 button.classList.add("about-main-master__action--active");
             }));
         }));
         const expertLinkButtons = document.querySelectorAll(".head-expert__link");
-        expertLinkButtons.forEach((button => {
+        if (expertLinkButtons !== null) expertLinkButtons.forEach((button => {
             button.addEventListener("click", (() => {
                 expertLinkButtons.forEach((btn => btn.classList.remove("link-expert-active")));
                 button.classList.add("link-expert-active");
             }));
         }));
+        const doctorItems = document.querySelectorAll(".doctors__item");
+        const loadMoreBlock = document.querySelector(".doctors__more");
+        const loadMoreButton = document.querySelector(".more-doctors__button");
+        const hiddenCountSpan = document.querySelector(".more-doctors__label span:nth-child(2)");
+        const INITIAL_VISIBLE = 7;
+        const LOAD_MORE_COUNT = 4;
+        let visibleCount = INITIAL_VISIBLE;
+        if (doctorItems, loadMoreBlock !== null) {
+            const fadeIn = element => {
+                element.style.opacity = 0;
+                element.style.display = "";
+                const fadeDuration = 300;
+                let startTime = null;
+                const fade = timestamp => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = (timestamp - startTime) / fadeDuration;
+                    element.style.opacity = Math.min(progress, 1);
+                    if (progress < 1) requestAnimationFrame(fade);
+                };
+                requestAnimationFrame(fade);
+            };
+            const updateVisibility = () => {
+                doctorItems.forEach(((item, index) => {
+                    if (index < visibleCount) if (item.style.display === "none") fadeIn(item); else item.style.display = ""; else item.style.display = "none";
+                }));
+                const hiddenCount = Math.max(doctorItems.length - visibleCount, 0);
+                hiddenCountSpan.textContent = hiddenCount;
+                if (hiddenCount === 0) loadMoreBlock.style.display = "none"; else loadMoreBlock.style.display = "";
+            };
+            loadMoreButton.addEventListener("click", (() => {
+                visibleCount += LOAD_MORE_COUNT;
+                updateVisibility();
+            }));
+            updateVisibility();
+        }
     }));
     window["FLS"] = false;
     addLoadedClass();

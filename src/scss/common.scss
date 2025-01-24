@@ -279,20 +279,30 @@ summary {
 	display: grid;
 	@include adaptiveValue("gap", 20, 15);
 	grid-template-columns: repeat(auto-fill, minmax(toRem(250), 1fr));
-	// .doctors__item
-	&__item {
-	}
-	// .doctors__more
-	&__more {
-	}
+}
+.doctors__item[style="display: none;"] {
+	opacity: 0;
+	transform: translateY(20px);
+}
+.doctors__item[style="display: block;"] {
+	opacity: 1;
+	transform: translateY(0);
 }
 .item-doctors {
+	opacity: 0;
 	display: grid;
 	row-gap: toRem(20);
 	background-color: #fff;
 	grid-template-rows: 1fr auto;
 	@include adaptiveValue("padding", 30, 15);
 	@include adaptiveValue("border-radius", 35, 20);
+	transition:
+		opacity 0.4s linear,
+		transform 0.4s linear,
+		box-shadow 0.4s linear;
+	&._watcher-view {
+		opacity: 1;
+	}
 	@media (any-hover: hover) {
 		&:hover {
 			.item-doctors__image {
@@ -306,35 +316,6 @@ summary {
 			}
 		}
 	}
-	&.item-doctors-sm {
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 0;
-		opacity: 0;
-		overflow: hidden;
-		visibility: hidden;
-		position: absolute;
-		transform: translateY(40px);
-		transition:
-			opacity 0.7s ease,
-			transform 0.7s ease,
-			box-shadow 0.5s ease,
-			visibility 0s linear 0.5s,
-			height 0s linear 0.5s;
-		&.visible {
-			opacity: 1;
-			height: auto;
-			position: relative;
-			visibility: visible;
-			transform: translateY(0);
-			transition:
-				opacity 0.7s ease,
-				transform 0.7s ease,
-				box-shadow 0.5s ease,
-				height 0s ease;
-		}
-	}
 	// .item-doctors__about
 	&__about {
 		display: grid;
@@ -344,6 +325,7 @@ summary {
 	// .item-doctors__profile
 	&__profile {
 		color: $greenColor;
+		margin: 0 toRem(-15);
 	}
 	// .item-doctors__picture
 	&__picture {
