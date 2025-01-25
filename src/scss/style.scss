@@ -180,6 +180,7 @@ body {
 // Підключення стилів окремих блоків
 @import "home";
 @import "card";
+@import "sample";
 @import "expert";
 @import "service";
 // $=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=->
@@ -187,27 +188,27 @@ body {
 @import "header";
 @import "footer";
 // ========================================================================================================================================================
-// Background
-.background {
-	background-color: #fff;
-	margin-left: toRem(25);
-	margin-right: toRem(25);
-	@include adaptiveValue("border-radius", 40, 23);
-	@media (max-width: toEm(1329.98)) {
+// Cover
+.cover {
+	margin: 0 auto;
+	max-width: toRem(1330);
+	// .cover__body
+	&__body {
+		background-color: #fff;
 		margin-left: toRem(15);
 		margin-right: toRem(15);
-	}
-	// .background--01
-	&--01 {
-		margin-top: toRem(15);
-	}
-	// .background--02
-	&--02 {
-		@include adaptiveValue("margin-top", 40, 30);
-	}
-	// .background--03
-	&--03 {
-		@include adaptiveValue("margin-top", 30, 25);
+		@include adaptiveValue("border-radius", 40, 20, 0, $containerWidth, 767.98);
+		@media (min-width: $tablet) {
+			padding: toRem(0) toRem(5);
+		}
+		// .cover__body--first
+		&--first {
+			margin-top: toRem(15);
+		}
+		// .cover__body--second
+		&--second {
+			@include adaptiveValue("margin-top", 45, 25);
+		}
 	}
 }
 // ========================================================================================================================================================

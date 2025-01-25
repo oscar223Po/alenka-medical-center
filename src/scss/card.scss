@@ -62,15 +62,9 @@
 	&__button {
 		display: flex;
 		@include adaptiveValue("gap", 25, 15);
-		@include adaptiveValue("border-radius", 35, 20);
 		&.button {
 			@include adaptiveValue("font-size", 28, 19);
 			@include adaptiveValue("min-height", 85, 55);
-			&::before,
-			&::after {
-				border-radius: 50px;
-				transform: scale(1.15);
-			}
 		}
 		span {
 			display: flex;
@@ -305,10 +299,7 @@
 		display: flex;
 		justify-content: center;
 		.button {
-			min-height: toRem(58);
-			border-radius: toRem(30);
 			padding: toRem(0) toRem(35);
-			@include adaptiveValue("font-size", 22, 16);
 		}
 	}
 }

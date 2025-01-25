@@ -3,19 +3,13 @@
 	margin: 0 auto;
 	margin-top: toRem(15);
 	max-width: toRem(1360);
-	// .agency__body
-	&__body {
+	// .agency__container
+	&__container {
 		display: grid;
 		gap: toRem(20);
 		justify-items: start;
-		background-color: #fff;
-		margin-left: toRem(15);
-		margin-right: toRem(15);
 		@include adaptiveValue("padding-top", 30, 20);
-		@include adaptiveValue("border-radius", 40, 23);
 		@include adaptiveValue("padding-bottom", 35, 25);
-		@include adaptiveValue("padding-left", 35, 15, 0, $containerWidth, 767.98);
-		@include adaptiveValue("padding-right", 35, 15, 0, $containerWidth, 767.98);
 	}
 	// .agency__breadcrumb
 	&__breadcrumb {
@@ -83,8 +77,8 @@
 	display: grid;
 	margin: 0 auto;
 	row-gap: toRem(20);
-	padding-top: toRem(15);
-	max-width: toRem(1360);
+	max-width: toRem(1330);
+	padding-top: toRem(20);
 	&:not(:last-child) {
 		margin-bottom: toRem(10);
 	}
@@ -117,12 +111,12 @@
 		}
 		@media (max-width: $tablet) {
 			border-radius: toRem(0) toRem(15) toRem(15) toRem(0);
-			margin: toRem(0) toRem(-15);
 		}
 		@media (max-width: $mobile) {
 			display: flex;
 			column-gap: toRem(15);
 			border-radius: toRem(5);
+			margin: toRem(0) toRem(-15);
 			flex-direction: row-reverse;
 			padding: toRem(12) toRem(18);
 			&:not(:last-child) {
@@ -159,11 +153,9 @@
 	background-color: #fff;
 	margin-left: toRem(15);
 	margin-right: toRem(15);
-	@include adaptiveValue("border-radius", 40, 23);
-	@include adaptiveValue("padding-bottom", 50, 30);
-	@include adaptiveValue("padding-top", 50, 40, 2, $containerWidth, 767.98);
-	@include adaptiveValue("padding-left", 35, 15, 0, $containerWidth, 767.98);
-	@include adaptiveValue("padding-right", 60, 45, 2, $containerWidth, 767.98);
+	@include adaptiveValue("padding-bottom", 40, 30);
+	@include adaptiveValue("padding-top", 40, 30, 2, $containerWidth, 767.98);
+	@include adaptiveValue("border-radius", 40, 20, 0, $containerWidth, 767.98);
 	&::before {
 		color: #ececec;
 		position: absolute;
@@ -174,13 +166,20 @@
 			display: none;
 		}
 	}
-	@media (max-width: $mobile) {
-		padding-right: toRem(15);
-	}
 	// .block-result__body
 	&__body {
 		display: grid;
 		gap: toRem(20);
+		margin: 0 auto;
+		max-width: toRem(1260);
+		padding-left: toRem(20);
+		@include adaptiveValue("padding-right", 60, 45, 2, $containerWidth, 767.98);
+		@media (max-width: $tablet) {
+			padding-left: toRem(15);
+		}
+		@media (max-width: $mobile) {
+			padding-right: toRem(15);
+		}
 		&.large-gap {
 			@include adaptiveValue("gap", 30, 20);
 		}

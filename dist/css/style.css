@@ -256,7 +256,7 @@ body {
   font-weight: 700;
   position: relative;
   align-items: center;
-  border-radius: 22px;
+  border-radius: 35px;
   display: inline-flex;
   transition: color .5s;
   justify-content: center;
@@ -274,7 +274,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  border-radius: 22px;
+  border-radius: 35px;
   transition: left .5s;
   -webkit-transform: scale(1.15);
   transform: scale(1.15)
@@ -1607,6 +1607,9 @@ summary::marker {
 .item-advantage__image img {
   max-width: 100%
 }
+.watch.watch-bg {
+  background-color: #111
+}
 .watch__body {
   opacity: 0;
   transition: opacity .5s ease .05s,box-shadow .5s;
@@ -1617,6 +1620,9 @@ summary::marker {
 }
 .watch__body._watcher-view {
   opacity: 1
+}
+.watch__body.watch-body-bg {
+  background-color: rgba(66,174,141,.1)
 }
 .watch__gallery {
   display: grid;
@@ -1656,7 +1662,9 @@ summary::marker {
 }
 .record__video {
   -o-object-fit: cover;
-  object-fit: cover
+  object-fit: cover;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05)
 }
 .record__video.video-pointer {
   cursor: pointer
@@ -1782,12 +1790,6 @@ summary::marker {
 }
 .main-master__button {
   display: flex
-}
-.main-master__button.button::after,
-.main-master__button.button::before {
-  border-radius: 50px;
-  -webkit-transform: scale(1.15);
-  transform: scale(1.15)
 }
 .main-master__button span {
   display: flex;
@@ -1937,8 +1939,6 @@ summary::marker {
   justify-content: center
 }
 .serve__button .button {
-  min-height: 3.625rem;
-  border-radius: 1.875rem;
   padding: 0 2.1875rem
 }
 .item-serve {
@@ -2156,6 +2156,54 @@ summary::marker {
 .buttons-doctor__button:last-child {
   background-color: #42ae8d
 }
+.sample__container {
+  display: grid
+}
+.head-sample__breadcrumb:not(:last-child) {
+  margin-bottom: .9375rem
+}
+.head-sample__title {
+  max-width: 62.5rem
+}
+.head-sample__title.title {
+  text-align: left
+}
+.note-sample {
+  display: grid
+}
+.note-sample__title {
+  font-weight: 800;
+  line-height: 120%;
+  color: #42ae8d
+}
+.note-sample__text {
+  font-weight: 300;
+  line-height: 130%
+}
+.note-sample__text span {
+  font-weight: 700
+}
+.method {
+  display: grid;
+  overflow: hidden
+}
+.method__body {
+  height: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(90deg,#fbe3c9 0,#f8f8e0 100%)
+}
+.method__title {
+  color: #2c2c2c;
+  font-weight: 700;
+  line-height: 120%
+}
+.method__title span {
+  display: flex;
+  font-weight: 400
+}
 .head-expert__title.title {
   text-align: left
 }
@@ -2248,13 +2296,10 @@ summary::marker {
   margin-top: .9375rem;
   max-width: 85rem
 }
-.agency__body {
+.agency__container {
   display: grid;
   gap: 1.25rem;
-  justify-items: start;
-  background-color: #fff;
-  margin-left: .9375rem;
-  margin-right: .9375rem
+  justify-items: start
 }
 .agency__blocks {
   width: 100%;
@@ -2296,8 +2341,8 @@ summary::marker {
   display: grid;
   margin: 0 auto;
   row-gap: 1.25rem;
-  padding-top: .9375rem;
-  max-width: 85rem
+  max-width: 83.125rem;
+  padding-top: 1.25rem
 }
 .result:not(:last-child) {
   margin-bottom: .625rem
@@ -2335,7 +2380,10 @@ summary::marker {
 }
 .block-result__body {
   display: grid;
-  gap: 1.25rem
+  gap: 1.25rem;
+  margin: 0 auto;
+  max-width: 78.75rem;
+  padding-left: 1.25rem
 }
 .block-result__title {
   font-weight: 800;
@@ -2578,12 +2626,16 @@ summary::marker {
   display: flex;
   justify-content: center
 }
-.background {
-  background-color: #fff;
-  margin-left: 1.5625rem;
-  margin-right: 1.5625rem
+.cover {
+  margin: 0 auto;
+  max-width: 83.125rem
 }
-.background--01 {
+.cover__body {
+  background-color: #fff;
+  margin-left: .9375rem;
+  margin-right: .9375rem
+}
+.cover__body--first {
   margin-top: .9375rem
 }
 .swiper {
@@ -2708,6 +2760,9 @@ summary::marker {
   .item-serve:first-child .item-serve__detail:last-child::before {
     content: "Ближайшая запись"
   }
+  .method {
+    grid-template-columns: repeat(2,1fr)
+  }
   .result__label {
     right: 0;
     top: 50%;
@@ -2830,6 +2885,9 @@ summary::marker {
   .main-doctor__image {
     max-width: 8.125rem
   }
+  .cover__body {
+    padding: 0 .3125rem
+  }
 }
 @media (min-width:78.125em) {
   .button {
@@ -2837,6 +2895,12 @@ summary::marker {
   }
   .button {
     min-height: 2.8125rem
+  }
+  .button--large {
+    font-size: 1.375rem
+  }
+  .button--large {
+    min-height: 3.625rem
   }
   .select__value {
     height: 3.75rem
@@ -3209,7 +3273,7 @@ summary::marker {
   .item-advantage__text {
     font-size: .9375rem
   }
-  .watch {
+  .watch__contain-lnd {
     padding-top: 4.375rem
   }
   .watch__body {
@@ -3295,9 +3359,6 @@ summary::marker {
   .main-master__button {
     gap: 1.5625rem
   }
-  .main-master__button {
-    border-radius: 2.1875rem
-  }
   .main-master__button.button {
     font-size: 1.75rem
   }
@@ -3375,9 +3436,6 @@ summary::marker {
   }
   .serve__body:not(:last-child) {
     margin-bottom: 2.8125rem
-  }
-  .serve__button .button {
-    font-size: 1.375rem
   }
   .item-serve__label {
     font-size: 1.5625rem
@@ -3517,6 +3575,57 @@ summary::marker {
   .buttons-doctor__button::before {
     font-size: 1.125rem
   }
+  .sample {
+    padding-top: 2.1875rem
+  }
+  .sample {
+    padding-bottom: 2.1875rem
+  }
+  .sample__container {
+    gap: 1.875rem
+  }
+  .head-sample__title.title {
+    font-size: 2.6875rem
+  }
+  .note-sample {
+    gap: 1.25rem
+  }
+  .note-sample__title {
+    font-size: 1.5625rem
+  }
+  .note-sample__title:not(:last-child) {
+    margin-bottom: 1.25rem
+  }
+  .note-sample__text {
+    font-size: 1.5625rem
+  }
+  .method {
+    border-radius: 2.1875rem
+  }
+  .method__body {
+    row-gap: 1.875rem
+  }
+  .method__body {
+    padding-top: 2.1875rem
+  }
+  .method__body {
+    padding-left: 2.5rem
+  }
+  .method__body {
+    padding-right: 2.5rem
+  }
+  .method__body {
+    padding-bottom: 2.1875rem
+  }
+  .method__title {
+    font-size: 2.3125rem
+  }
+  .method__button {
+    padding-left: 3.125rem
+  }
+  .method__button {
+    padding-right: 3.125rem
+  }
   .expert {
     padding-top: 2.5rem
   }
@@ -3550,20 +3659,11 @@ summary::marker {
   .head-expert__link {
     padding-bottom: 1.0625rem
   }
-  .agency__body {
+  .agency__container {
     padding-top: 1.875rem
   }
-  .agency__body {
-    border-radius: 2.5rem
-  }
-  .agency__body {
+  .agency__container {
     padding-bottom: 2.1875rem
-  }
-  .agency__body {
-    padding-left: 2.1875rem
-  }
-  .agency__body {
-    padding-right: 2.1875rem
   }
   .agency__block {
     -webkit-column-gap: 1.5625rem;
@@ -3583,19 +3683,13 @@ summary::marker {
     font-size: 1.625rem
   }
   .block-result {
+    padding-bottom: 2.5rem
+  }
+  .block-result {
+    padding-top: 2.5rem
+  }
+  .block-result {
     border-radius: 2.5rem
-  }
-  .block-result {
-    padding-bottom: 3.125rem
-  }
-  .block-result {
-    padding-top: 3.125rem
-  }
-  .block-result {
-    padding-left: 2.1875rem
-  }
-  .block-result {
-    padding-right: 3.75rem
   }
   .block-result::before {
     top: 1.5625rem
@@ -3605,6 +3699,9 @@ summary::marker {
   }
   .block-result::before {
     font-size: 4.375rem
+  }
+  .block-result__body {
+    padding-right: 3.75rem
   }
   .block-result__body.large-gap {
     gap: 1.875rem
@@ -3674,14 +3771,11 @@ summary::marker {
   .head-footer__logo {
     max-width: 8.4375rem
   }
-  .background {
+  .cover__body {
     border-radius: 2.5rem
   }
-  .background--02 {
-    margin-top: 2.5rem
-  }
-  .background--03 {
-    margin-top: 1.875rem
+  .cover__body--second {
+    margin-top: 2.8125rem
   }
 }
 @media (min-width:81.24875em) {
@@ -3713,6 +3807,12 @@ summary::marker {
   }
   .button {
     min-height: 2.5rem
+  }
+  .button--large {
+    font-size: 1.125rem
+  }
+  .button--large {
+    min-height: 2.8125rem
   }
   .select__value {
     height: 2.8125rem
@@ -4009,7 +4109,7 @@ summary::marker {
   .item-advantage--03 .item-advantage__title {
     font-size: .875rem
   }
-  .watch {
+  .watch__contain-lnd {
     padding-top: 2.1875rem
   }
   .watch__body {
@@ -4071,9 +4171,6 @@ summary::marker {
   }
   .main-master__button {
     gap: .9375rem
-  }
-  .main-master__button {
-    border-radius: 1.25rem
   }
   .main-master__button.button {
     font-size: 1.1875rem
@@ -4146,9 +4243,6 @@ summary::marker {
   }
   .serve__body:not(:last-child) {
     margin-bottom: 1.5625rem
-  }
-  .serve__button .button {
-    font-size: 1rem
   }
   .item-serve__detail {
     font-size: 1rem
@@ -4282,6 +4376,51 @@ summary::marker {
   .buttons-doctor__button::before {
     font-size: 1rem
   }
+  .sample {
+    padding-top: 1.5625rem
+  }
+  .sample {
+    padding-bottom: 1.5625rem
+  }
+  .sample__container {
+    gap: 1.25rem
+  }
+  .head-sample__title.title {
+    font-size: 1.375rem
+  }
+  .note-sample {
+    gap: .625rem
+  }
+  .note-sample__title {
+    font-size: 1.125rem
+  }
+  .note-sample__title:not(:last-child) {
+    margin-bottom: .625rem
+  }
+  .note-sample__text {
+    font-size: 1rem
+  }
+  .method {
+    border-radius: 1.25rem
+  }
+  .method__body {
+    row-gap: 1.25rem
+  }
+  .method__body {
+    padding-top: 1.0625rem
+  }
+  .method__body {
+    padding-left: 1.25rem
+  }
+  .method__body {
+    padding-right: 1.25rem
+  }
+  .method__body {
+    padding-bottom: 1.25rem
+  }
+  .method__title {
+    font-size: 1.5rem
+  }
   .expert {
     padding-top: 1.25rem
   }
@@ -4315,13 +4454,10 @@ summary::marker {
   .head-expert__link {
     padding-bottom: .75rem
   }
-  .agency__body {
+  .agency__container {
     padding-top: 1.25rem
   }
-  .agency__body {
-    border-radius: 1.4375rem
-  }
-  .agency__body {
+  .agency__container {
     padding-bottom: 1.5625rem
   }
   .agency__block {
@@ -4340,9 +4476,6 @@ summary::marker {
   }
   .result__label {
     font-size: 1.3125rem
-  }
-  .block-result {
-    border-radius: 1.4375rem
   }
   .block-result {
     padding-bottom: 1.875rem
@@ -4389,20 +4522,8 @@ summary::marker {
   .footer__text:not(:last-child) {
     margin-bottom: .875rem
   }
-  .background {
-    border-radius: 1.4375rem
-  }
-  .background--02 {
-    margin-top: 1.875rem
-  }
-  .background--03 {
+  .cover__body--second {
     margin-top: 1.5625rem
-  }
-}
-@media (max-width:83.12375em) {
-  .background {
-    margin-left: .9375rem;
-    margin-right: .9375rem
   }
 }
 @media (max-width:81.24875em) {
@@ -4457,8 +4578,10 @@ summary::marker {
     justify-content: space-between
   }
   .result__label {
-    border-radius: 0 .9375rem .9375rem 0;
-    margin: 0 -.9375rem
+    border-radius: 0 .9375rem .9375rem 0
+  }
+  .block-result__body {
+    padding-left: .9375rem
   }
   .footer__contain-lnd,
   .footer__container {
@@ -4776,11 +4899,11 @@ summary::marker {
     padding-top: .9375rem;
     padding-bottom: .9375rem
   }
-  .agency__body {
-    padding-left: .9375rem
+  .method__body {
+    order: 2
   }
-  .agency__body {
-    padding-right: .9375rem
+  .method__image {
+    order: 1
   }
   .agency__block {
     width: 100%;
@@ -4796,6 +4919,7 @@ summary::marker {
     -moz-column-gap: .9375rem;
     column-gap: .9375rem;
     border-radius: .3125rem;
+    margin: 0 -.9375rem;
     flex-direction: row-reverse;
     padding: .75rem 1.125rem
   }
@@ -4803,12 +4927,12 @@ summary::marker {
     margin-bottom: 1.375rem
   }
   .block-result {
-    padding-left: .9375rem
+    border-radius: 1.25rem
   }
   .block-result::before {
     display: none
   }
-  .block-result {
+  .block-result__body {
     padding-right: .9375rem
   }
   .footer {
@@ -4850,6 +4974,9 @@ summary::marker {
   }
   .aside-footer__spollers:not(:last-child) {
     margin-bottom: 1.5625rem
+  }
+  .cover__body {
+    border-radius: 1.25rem
   }
 }
 @media (max-width:47.99875em)and (any-hover:hover) {
@@ -5067,6 +5194,9 @@ summary::marker {
     padding-right: .5rem;
     padding-left: .9375rem
   }
+  .method__button {
+    width: 100%
+  }
   .result__label {
     -webkit-column-gap: .5rem;
     -moz-column-gap: .5rem;
@@ -5116,6 +5246,12 @@ summary::marker {
   }
   .button {
     min-height: clamp(2.5rem ,2.3924731183rem + .5376344086vw ,2.8125rem)
+  }
+  .button--large {
+    font-size: clamp(1.125rem ,1.0389784946rem + .4301075269vw ,1.375rem)
+  }
+  .button--large {
+    min-height: clamp(2.8125rem ,2.5329301075rem + 1.3978494624vw ,3.625rem)
   }
   .select__value {
     height: clamp(2.8125rem ,2.4899193548rem + 1.6129032258vw ,3.75rem)
@@ -5412,7 +5548,7 @@ summary::marker {
   .item-advantage--03 .item-advantage__title {
     font-size: clamp(.875rem ,.7889784946rem + .4301075269vw ,1.125rem)
   }
-  .watch {
+  .watch__contain-lnd {
     padding-top: clamp(2.1875rem ,1.434811828rem + 3.7634408602vw ,4.375rem)
   }
   .watch__body {
@@ -5474,9 +5610,6 @@ summary::marker {
   }
   .main-master__button {
     gap: clamp(.9375rem ,.7224462366rem + 1.0752688172vw ,1.5625rem)
-  }
-  .main-master__button {
-    border-radius: clamp(1.25rem ,.9274193548rem + 1.6129032258vw ,2.1875rem)
   }
   .main-master__button.button {
     font-size: clamp(1.1875rem ,.9939516129rem + .9677419355vw ,1.75rem)
@@ -5549,9 +5682,6 @@ summary::marker {
   }
   .serve__body:not(:last-child) {
     margin-bottom: clamp(1.5625rem ,1.1323924731rem + 2.1505376344vw ,2.8125rem)
-  }
-  .serve__button .button {
-    font-size: clamp(1rem ,.8709677419rem + .6451612903vw ,1.375rem)
   }
   .item-serve__detail {
     font-size: clamp(1rem ,.9139784946rem + .4301075269vw ,1.25rem)
@@ -5685,6 +5815,51 @@ summary::marker {
   .buttons-doctor__button::before {
     font-size: clamp(1rem ,.9569892473rem + .2150537634vw ,1.125rem)
   }
+  .sample {
+    padding-top: clamp(1.5625rem ,1.3474462366rem + 1.0752688172vw ,2.1875rem)
+  }
+  .sample {
+    padding-bottom: clamp(1.5625rem ,1.3474462366rem + 1.0752688172vw ,2.1875rem)
+  }
+  .sample__container {
+    gap: clamp(1.25rem ,1.0349462366rem + 1.0752688172vw ,1.875rem)
+  }
+  .head-sample__title.title {
+    font-size: clamp(1.375rem ,.9233870968rem + 2.2580645161vw ,2.6875rem)
+  }
+  .note-sample {
+    gap: clamp(.625rem ,.4099462366rem + 1.0752688172vw ,1.25rem)
+  }
+  .note-sample__title {
+    font-size: clamp(1.125rem ,.9744623656rem + .752688172vw ,1.5625rem)
+  }
+  .note-sample__title:not(:last-child) {
+    margin-bottom: clamp(.625rem ,.4099462366rem + 1.0752688172vw ,1.25rem)
+  }
+  .note-sample__text {
+    font-size: clamp(1rem ,.8064516129rem + .9677419355vw ,1.5625rem)
+  }
+  .method {
+    border-radius: clamp(1.25rem ,.9274193548rem + 1.6129032258vw ,2.1875rem)
+  }
+  .method__body {
+    row-gap: clamp(1.25rem ,1.0349462366rem + 1.0752688172vw ,1.875rem)
+  }
+  .method__body {
+    padding-top: clamp(1.0625rem ,.6754032258rem + 1.935483871vw ,2.1875rem)
+  }
+  .method__body {
+    padding-left: clamp(1.25rem ,.8198924731rem + 2.1505376344vw ,2.5rem)
+  }
+  .method__body {
+    padding-right: clamp(1.25rem ,.8198924731rem + 2.1505376344vw ,2.5rem)
+  }
+  .method__body {
+    padding-bottom: clamp(1.25rem ,.9274193548rem + 1.6129032258vw ,2.1875rem)
+  }
+  .method__title {
+    font-size: clamp(1.5rem ,1.2204301075rem + 1.3978494624vw ,2.3125rem)
+  }
   .expert {
     padding-top: clamp(1.25rem ,.8198924731rem + 2.1505376344vw ,2.5rem)
   }
@@ -5718,13 +5893,10 @@ summary::marker {
   .head-expert__link {
     padding-bottom: clamp(.75rem ,.6424731183rem + .5376344086vw ,1.0625rem)
   }
-  .agency__body {
+  .agency__container {
     padding-top: clamp(1.25rem ,1.0349462366rem + 1.0752688172vw ,1.875rem)
   }
-  .agency__body {
-    border-radius: clamp(1.4375rem ,1.0719086022rem + 1.8279569892vw ,2.5rem)
-  }
-  .agency__body {
+  .agency__container {
     padding-bottom: clamp(1.5625rem ,1.3474462366rem + 1.0752688172vw ,2.1875rem)
   }
   .agency__block {
@@ -5745,10 +5917,7 @@ summary::marker {
     font-size: clamp(1.3125rem ,1.2049731183rem + .5376344086vw ,1.625rem)
   }
   .block-result {
-    border-radius: clamp(1.4375rem ,1.0719086022rem + 1.8279569892vw ,2.5rem)
-  }
-  .block-result {
-    padding-bottom: clamp(1.875rem ,1.4448924731rem + 2.1505376344vw ,3.125rem)
+    padding-bottom: clamp(1.875rem ,1.6599462366rem + 1.0752688172vw ,2.5rem)
   }
   .block-result__body.large-gap {
     gap: clamp(1.25rem ,1.0349462366rem + 1.0752688172vw ,1.875rem)
@@ -5792,14 +5961,8 @@ summary::marker {
   .footer__text:not(:last-child) {
     margin-bottom: clamp(.875rem ,.7459677419rem + .6451612903vw ,1.25rem)
   }
-  .background {
-    border-radius: clamp(1.4375rem ,1.0719086022rem + 1.8279569892vw ,2.5rem)
-  }
-  .background--02 {
-    margin-top: clamp(1.875rem ,1.6599462366rem + 1.0752688172vw ,2.5rem)
-  }
-  .background--03 {
-    margin-top: clamp(1.5625rem ,1.4549731183rem + .5376344086vw ,1.875rem)
+  .cover__body--second {
+    margin-top: clamp(1.5625rem ,1.1323924731rem + 2.1505376344vw ,2.8125rem)
   }
 }
 @media (min-width:47.99875em)and (max-width:78.125em) {
@@ -5906,20 +6069,11 @@ summary::marker {
   .item-serve__details {
     gap: clamp(.625rem ,-.868675055rem + 3.1119040704vw ,1.5625rem)
   }
-  .agency__body {
-    padding-left: clamp(.9375rem ,-1.05406674rem + 4.1492054272vw ,2.1875rem)
-  }
-  .agency__body {
-    padding-right: clamp(.9375rem ,-1.05406674rem + 4.1492054272vw ,2.1875rem)
+  .block-result {
+    padding-top: clamp(1.875rem ,.87921663rem + 2.0746027136vw ,2.5rem)
   }
   .block-result {
-    padding-top: clamp(2.5rem ,1.50421663rem + 2.0746027136vw ,3.125rem)
-  }
-  .block-result {
-    padding-left: clamp(.9375rem ,-1.05406674rem + 4.1492054272vw ,2.1875rem)
-  }
-  .block-result {
-    padding-right: clamp(2.8125rem ,1.318824945rem + 3.1119040704vw ,3.75rem)
+    border-radius: clamp(1.25rem ,-.74156674rem + 4.1492054272vw ,2.5rem)
   }
   .block-result::before {
     top: clamp(.625rem ,-.868675055rem + 3.1119040704vw ,1.5625rem)
@@ -5929,6 +6083,9 @@ summary::marker {
   }
   .block-result::before {
     font-size: clamp(3.4375rem ,1.943824945rem + 3.1119040704vw ,4.375rem)
+  }
+  .block-result__body {
+    padding-right: clamp(2.8125rem ,1.318824945rem + 3.1119040704vw ,3.75rem)
   }
   .footer__contain-lnd,
   .footer__container {
@@ -5955,6 +6112,9 @@ summary::marker {
   }
   .head-footer__logo {
     max-width: clamp(5.9375rem ,1.9543665201rem + 8.2984108543vw ,8.4375rem)
+  }
+  .cover__body {
+    border-radius: clamp(1.25rem ,-.74156674rem + 4.1492054272vw ,2.5rem)
   }
 }
 @media (max-width:47.99875em)and (min-width:47.99875em) {
@@ -6109,6 +6269,14 @@ summary::marker {
   .item-serve:first-child .item-serve__detail:first-child::before,
   .item-serve:first-child .item-serve__detail:last-child::before {
     font-size: .875rem
+  }
+}
+@media (min-width:29.99875em)and (max-width:78.125em) {
+  .method__button {
+    padding-left: clamp(1.5625rem ,.5885399081rem + 3.2466689177vw ,3.125rem)
+  }
+  .method__button {
+    padding-right: clamp(1.5625rem ,.5885399081rem + 3.2466689177vw ,3.125rem)
   }
 }
 @media (any-hover:hover) {

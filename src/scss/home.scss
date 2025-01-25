@@ -929,9 +929,12 @@
 }
 // Watch
 .watch {
-	@include adaptiveValue("padding-top", 70, 35);
+	&.watch-bg {
+		background-color: #111;
+	}
 	// .watch__contain-lnd
 	&__contain-lnd {
+		@include adaptiveValue("padding-top", 70, 35);
 	}
 	// .watch__body
 	&__body {
@@ -947,6 +950,9 @@
 		background-color: #fff;
 		grid-template-columns: 66.086957% 1fr;
 		@include adaptiveValue("border-radius", 35, 12);
+		&.watch-body-bg {
+			background-color: rgba($greenColor, 0.1);
+		}
 		@media (max-width: $tablet) {
 			grid-template-columns: 56.086957% 1fr;
 		}
@@ -1025,6 +1031,7 @@
 	// .record__video
 	&__video {
 		object-fit: cover;
+		transform: scale(1.05);
 		&.video-pointer {
 			cursor: pointer;
 		}

@@ -1,0 +1,103 @@
+// Sample
+.sample {
+	@include adaptiveValue("padding-top", 35, 25);
+	@include adaptiveValue("padding-bottom", 35, 25);
+	// .sample__container
+	&__container {
+		display: grid;
+		@include adaptiveValue("gap", 30, 20);
+	}
+}
+.head-sample {
+	// .head-sample__breadcrumb
+	&__breadcrumb {
+		&:not(:last-child) {
+			margin-bottom: toRem(15);
+		}
+	}
+	// .head-sample__title
+	&__title {
+		max-width: toRem(1000);
+		&.title {
+			text-align: left;
+			@include adaptiveValue("font-size", 43, 22);
+		}
+	}
+}
+.note-sample {
+	display: grid;
+	@include adaptiveValue("gap", 20, 10);
+	// .note-sample__item
+	&__item {
+	}
+	// .note-sample__title
+	&__title {
+		font-weight: 800;
+		line-height: 120%;
+		color: $greenColor;
+		@include adaptiveValue("font-size", 25, 18);
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 20, 10);
+		}
+	}
+	// .note-sample__text
+	&__text {
+		font-weight: 300;
+		line-height: 130%;
+		@include adaptiveValue("font-size", 25, 16);
+		span {
+			font-weight: 700;
+		}
+	}
+}
+// Section Method
+.method {
+	display: grid;
+	overflow: hidden;
+	@include adaptiveValue("border-radius", 35, 20);
+	@media (min-width: $mobile) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	// .method__body
+	&__body {
+		height: 100%;
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		background: linear-gradient(90deg, #fbe3c9 0%, #f8f8e0 100%);
+		@include adaptiveValue("row-gap", 30, 20);
+		@include adaptiveValue("padding-top", 35, 17);
+		@include adaptiveValue("padding-left", 40, 20);
+		@include adaptiveValue("padding-right", 40, 20);
+		@include adaptiveValue("padding-bottom", 35, 20);
+		@media (max-width: $mobile) {
+			order: 2;
+		}
+	}
+	// .method__title
+	&__title {
+		color: #2c2c2c;
+		font-weight: 700;
+		line-height: 120%;
+		@include adaptiveValue("font-size", 37, 24);
+		span {
+			display: flex;
+			font-weight: 400;
+		}
+	}
+	// .method__button
+	&__button {
+		@include adaptiveValue("padding-left", 50, 25, 2, $containerWidth, 479.98);
+		@include adaptiveValue("padding-right", 50, 25, 2, $containerWidth, 479.98);
+		@media (max-width: $mobileSmall) {
+			width: 100%;
+		}
+	}
+	// .method__image
+	&__image {
+		@media (max-width: $mobile) {
+			order: 1;
+		}
+	}
+}
