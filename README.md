@@ -1,15 +1,50 @@
-# Alenka Medical Center Website
+# 🚀 Alenka Medical Center Website
+
 The Alenka Medical Center website represents a multi-disciplinary healthcare network in Vladivostok, dedicated to providing top-quality medical services for families, with a special focus on children's health. Our clinics offer a wide range of medical specialties, including pediatrics, neurology, pediatric dentistry, surgery, ophthalmology, and more, all delivered by a team of professional and caring specialists.
+
+---
+
+<h3>🖼 Preview</h3>
 
 ![Preview](./src/preview.png)
 
-➼ Technology Stack:
-- HTML5 for structure
-- CSS3 for styling
-- SCSS/Sass for advanced styling and better maintainability
-- JavaScript for dynamic functionality
-- Gulp for task automation
-- Flexbox & Grid for responsive design
-- BEM methodology for clean, scalable code
+---
 
-This tech stack ensures a seamless user experience across all devices, providing an intuitive interface with practical elements such as online consultation bookings and informative sections about the clinic’s services and medical team.
+<h3>🎯 Project Goals</h3>
+
+- ✅ Build a user-friendly and adaptive website with responsive design that reflects the company’s services
+- ✨ Add personality and liveliness to the site through pure JavaScript animations
+- ⚡ Ensure high loading speed and cross-browser compatibility (Google Chrome, Safari, Yandex Browser, Opera, Edge, Brave, etc.)
+- 🛠 Develop clean, valid, and maintainable code using only standard web technologies to guarantee stability and performance
+
+---
+
+<h3>🧩 Development Features</h3>
+
+- 📐 Semantic **HTML5** markup for well-structured and accessible architecture  
+- 🎨 **CSS3 + SCSS (Sass)** for styling with modularity and reusability  
+- 🏷️ **BEM methodology** for organized class naming and scalability  
+- 📱 Responsive layout with **Flexbox** and **CSS Grid**  
+- ⚙️ **JavaScript** for interactive elements and dynamic behavior  
+- 🔄 **Gulp + Webpack** for task automation:  
+  - SCSS compilation  
+  - Minification  
+  - Image optimization  
+  - Hot-reload during development  
+
+---
+
+<h3>🛠️ Tech Stack</h3>
+
+| Technology         | Purpose                   |
+| ------------------ | ------------------------- |
+| **HTML5**          | Structure & semantics     |
+| **CSS3 / SCSS**    | Styling & maintainability |
+| **BEM**            | Clean and scalable code   |
+| **Flexbox & Grid** | Responsive design         |
+| **JavaScript**     | Dynamic functionality     |
+| **Gulp & Webpack** | Build automation          |
+
+---
+
+✨ The chosen **technology stack** ensures stable performance, ease of development, and long-term support.
